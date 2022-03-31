@@ -4,8 +4,9 @@ import java.util.Scanner;
 
 public class ArrivalTimes {
 	//class variables
-	ArrayList <Stops> stopsArray = new ArrayList<Stops>();
+	static ArrayList <Stops> stopsArray = new ArrayList<Stops>();
 	static ArrayList<StopTimes> stopTimesArray = new ArrayList<StopTimes>();
+	static ArrayList<Stops> stopsThatMatchArrivalTime = new ArrayList<Stops>();
 	//each element of the arraylist stores an object of type stops
 	
 	ArrivalTimes(String filenameStops, String filenameStopTimes)
@@ -78,19 +79,31 @@ public class ArrivalTimes {
 		}
 	}
 	
-	public static Stops findingMatchingArrivalTimes(Double userInputOfTime)
+	public static ArrayList <Stops> findingMatchingArrivalTimes(Double userInputOfTime)
 	{
 		//check user input is valid
 		StopTimes currentStopTimes;
+		int currentStopID;
+		Stops currentStop;
 		for (int i = 0; i < stopTimesArray.size(); i ++)
 		{
 			currentStopTimes = stopTimesArray.get(i);
 			if (currentStopTimes.arrivalTime == userInputOfTime)
 			{
 				//add to new valid arraylist
+				currentStopID = currentStopTimes.stopID;
+				//find stop with that ID
+				for (int j = 0; j < stopsArray.size(); j++)
+				{
+					if (currentStopID == stopsArray.get(i).id)
+					{
+						stopsThatMatchArrivalTime.add(stopsArray.get(i));
+						//add the stop to the arraylist of all stops that arrive at that given time
+					}
+				}
 			}
 		}
-		return null;
+		return stopsThatMatchArrivalTime;
 	}
 
 	public static void main(String[] args) {

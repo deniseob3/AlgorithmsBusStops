@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class ArrivalTimes {
 	//class variables
 	ArrayList <Stops> stopsArray = new ArrayList<Stops>();
-	ArrayList<StopTimes> stopTimesArray = new ArrayList<StopTimes>();
+	static ArrayList<StopTimes> stopTimesArray = new ArrayList<StopTimes>();
 	//each element of the arraylist stores an object of type stops
 	
 	ArrivalTimes(String filenameStops, String filenameStopTimes)
@@ -76,6 +76,21 @@ public class ArrivalTimes {
 				System.out.print("Invalid file name: stop times");
 			}
 		}
+	}
+	
+	public static Stops findingMatchingArrivalTimes(Double userInputOfTime)
+	{
+		//check user input is valid
+		StopTimes currentStopTimes;
+		for (int i = 0; i < stopTimesArray.size(); i ++)
+		{
+			currentStopTimes = stopTimesArray.get(i);
+			if (currentStopTimes.arrivalTime == userInputOfTime)
+			{
+				//add to new valid arraylist
+			}
+		}
+		return null;
 	}
 
 	public static void main(String[] args) {

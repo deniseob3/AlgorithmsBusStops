@@ -1,5 +1,5 @@
 
-public class Stops implements Comparable<Stops> {
+public class Stops /*implements Comparable<Stops> */{
 	public static int id;
 	public int code;
 	public String name;
@@ -26,14 +26,15 @@ public class Stops implements Comparable<Stops> {
 		this.parentStation = parentStation;
 	}
 
+
+	/*
 	@Override
 	public int compareTo(Stops compareStop) {
 		// TODO Auto-generated method stub
 		int compareID =((Stops)compareStop).id;
 		/* For Ascending order*/
-		return Stops.id-compareID;
+		//return Stops.id-compareID;
 
-	}
 
 
 

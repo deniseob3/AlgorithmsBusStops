@@ -1,7 +1,7 @@
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
+import java.util.List;
 import java.util.Scanner;
 
 public class ArrivalTimes {
@@ -42,7 +42,7 @@ public class ArrivalTimes {
 					}
 					i++;
 				}
-				
+				scanner.close();
 			}
 			catch (Exception e)
 			{
@@ -72,6 +72,7 @@ public class ArrivalTimes {
 					}
 					i++;
 				}
+				scanner2.close();
 				
 			}
 			catch(Exception e)
@@ -86,7 +87,6 @@ public class ArrivalTimes {
 		//check user input is valid
 		StopTimes currentStopTimes;
 		int currentStopID;
-		Stops currentStop;
 		for (int i = 0; i < stopTimesArray.size(); i ++)
 		{
 			currentStopTimes = stopTimesArray.get(i);
@@ -107,8 +107,9 @@ public class ArrivalTimes {
 		}
 		return stopsThatMatchArrivalTime;
 	}
-	public static void arrayListSortedByStopID(ArrayList <Stops> stopsThatMatchArrivalTime)
+	public static void arrayListSortedByStopID(ArrayList <StopTimes> stopsThatMatchArrivalTime)
 	{
+		//MUST PASS IN AN ARRAY OF TYPE STOP TIMES (NOT STOPS)
 		Collections.sort(stopsThatMatchArrivalTime);
 		//implemented comparable interface and made a sort by ID method
 		//might not work
@@ -117,12 +118,13 @@ public class ArrivalTimes {
 	public static void arrayListToString(ArrayList <Stops> stopsThatMatchArrivalTime)
 	{
 		Stops currentStop;
+		//make sure this array that is read in is sorted
 		for (int i = 0; i < stopsThatMatchArrivalTime.size(); i ++)
 		{
 			currentStop = stopsThatMatchArrivalTime.get(i);
 			//print out all elements of the stops that match (already sorted).
 			
-			System.out.println("ID: " + currentStop.id + " code: " + currentStop.code + " name " + currentStop.name);
+			System.out.println("ID: " + currentStop.id + " code: " + currentStop.code + " name " + currentStop.name + " description " + currentStop.description + " latitude " + currentStop.latitude + " longitude " + currentStop.longitude + " zone ID " + currentStop.zoneID + " Location Type " + currentStop.locationType);
 		}
 	}
 

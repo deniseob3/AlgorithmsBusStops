@@ -5,6 +5,7 @@ import java.util.Scanner;
 public class ArrivalTimes {
 	//class variables
 	ArrayList <Stops> stopsArray = new ArrayList<Stops>();
+	ArrayList<StopTimes> stopTimesArray = new ArrayList<StopTimes>();
 	//each element of the arraylist stores an object of type stops
 	
 	ArrivalTimes(String filenameStops, String filenameStopTimes)
@@ -27,7 +28,7 @@ public class ArrivalTimes {
 						//column headings
 						//do nothing with these
 					}
-					if (i == 1)
+					else
 					{
 						//store these values
 						//create a stop object with each line of the file
@@ -60,6 +61,13 @@ public class ArrivalTimes {
 					{
 						//row headings do nothing
 					}
+					else
+					{
+						StopTimes currentStopTime = new StopTimes(Integer.parseInt(line[0]), Double.parseDouble(line[1]), Double.parseDouble(line[2]), Integer.parseInt(line[3]), Integer.parseInt(line[4]), line[5], Integer.parseInt(line[6]), Integer.parseInt(line[7]), Double.parseDouble(line[8]) );
+						stopTimesArray.add(currentStopTime);
+						
+					}
+					i++;
 				}
 				
 			}

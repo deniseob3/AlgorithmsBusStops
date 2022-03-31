@@ -7,11 +7,11 @@ public class Stops {
 	public double latitude;
 	public double longitude;
 	public int zoneID;
-	//public int url; //type of url??
+	public String url; //type of url??
 	public int locationType;
-	//public int parentStation;
+	public int parentStation;
 	
-	Stops(int id, int code, String name, String description, double latitude, double longitude, int zoneID, int locationType)
+	Stops(int id, int code, String name, String description, double latitude, double longitude, int zoneID, String url, int locationType, int parentStation)
 	{
 		//creating a stop
 		this.id = id;
@@ -21,7 +21,9 @@ public class Stops {
 		this.latitude = latitude;
 		this.longitude = longitude;
 		this.zoneID = zoneID;
+		this.url = url;
 		this.locationType = locationType;
+		this.parentStation = parentStation;
 	}
 	
 	

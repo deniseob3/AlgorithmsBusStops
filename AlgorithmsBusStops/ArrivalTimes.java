@@ -49,6 +49,18 @@ public class ArrivalTimes {
 		if (filenameStopTimes!= null && filenameStopTimes != "")
 		{
 			try {
+				File file2 = new File(filenameStopTimes);
+				Scanner scanner2 = new Scanner(file2);
+				int i = 0;
+				
+				while(scanner2.hasNextLine())
+				{
+					String [] line = scanner2.nextLine().trim().split(",");
+					if (i == 0)
+					{
+						//row headings do nothing
+					}
+				}
 				
 			}
 			catch(Exception e)

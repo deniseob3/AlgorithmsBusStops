@@ -1,7 +1,6 @@
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 import java.util.Scanner;
 
 public class ArrivalTimes {
@@ -11,6 +10,7 @@ public class ArrivalTimes {
 	static ArrayList<StopTimes> tripsThatMatchArrivalTime = new ArrayList<StopTimes>();
 	//each element of the arraylist stores an object of type stops
 	//just stop times array
+	//pretty sure stops array is not needed here. Keep code for somewhere else
 	
 	ArrivalTimes(String filenameStops, String filenameStopTimes)
 	{
@@ -82,8 +82,26 @@ public class ArrivalTimes {
 			}
 		}
 	}
+	public static boolean validateUserInput(String userInput)
+	{
+		boolean valid = true;
+		String [] line = userInput.trim().split(":");
+		int hours = Integer.parseInt(line[0]);
+		int minutes = Integer.parseInt(line[1]);
+		int seconds = Integer.parseInt(line[2]);
+		if ((hours > 23)|| (minutes > 59) || (seconds > 59))
+		{
+			valid = false;
+		}
+		return valid;
+		//must validate the times in the file too!!
+		//in the constructor before I read it into the array, 
+		//validate each entry using the same function
+		//only add it to the array if it is valid entry
+		//otherwise skip.
+	}
 	
-	public static ArrayList <StopTimes> findingMatchingArrivalTimes(Double userInputOfTime)
+	public static ArrayList <StopTimes> findingMatchingArrivalTimes(int userInputOfTime)
 	{
 		//check user input is valid
 		StopTimes currentStopTimes;
@@ -116,16 +134,17 @@ public class ArrivalTimes {
 		//might not work
 	}
 	
-	public static void arrayListToString(ArrayList <Stops> tripsThatMatchArrivalTime)
+	public static void arrayListStopTimesToString(ArrayList <StopTimes> tripsThatMatchArrivalTime)
 	{
-		Stops currentStop;
+		StopTimes currentTrip;
 		//make sure this array that is read in is sorted
 		for (int i = 0; i < tripsThatMatchArrivalTime.size(); i ++)
 		{
-			currentStop = tripsThatMatchArrivalTime.get(i);
+			currentTrip = tripsThatMatchArrivalTime.get(i);
 			//print out all elements of the stops that match (already sorted).
 			
-			System.out.println("ID: " + currentStop.id + " code: " + currentStop.code + " name " + currentStop.name + " description " + currentStop.description + " latitude " + currentStop.latitude + " longitude " + currentStop.longitude + " zone ID " + currentStop.zoneID + " Location Type " + currentStop.locationType);
+			System.out.println("Trip ID: " + currentTrip.tripID + " arrival time: " + currentTrip.arrivalTime + " departure time " + currentTrip.departureTime + " stop ID " + currentTrip.stopID + " stop sequence " + currentTrip.stopSequence + " stop head sign " + currentTrip.stopHeadSign + " pickup type " + currentTrip.pickupType + "  drop off type " + currentTrip.dropOffType + " shape dist travelled " + currentTrip.shapeDistTravelled);
+			//print all info about the trips which match the arrival time
 		}
 	}
 

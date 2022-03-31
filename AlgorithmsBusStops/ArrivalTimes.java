@@ -8,8 +8,9 @@ public class ArrivalTimes {
 	//class variables
 	static ArrayList <Stops> stopsArray = new ArrayList<Stops>();
 	static ArrayList<StopTimes> stopTimesArray = new ArrayList<StopTimes>();
-	static ArrayList<Stops> stopsThatMatchArrivalTime = new ArrayList<Stops>();
+	static ArrayList<StopTimes> tripsThatMatchArrivalTime = new ArrayList<StopTimes>();
 	//each element of the arraylist stores an object of type stops
+	//just stop times array
 	
 	ArrivalTimes(String filenameStops, String filenameStopTimes)
 	{
@@ -82,46 +83,46 @@ public class ArrivalTimes {
 		}
 	}
 	
-	public static ArrayList <Stops> findingMatchingArrivalTimes(Double userInputOfTime)
+	public static ArrayList <StopTimes> findingMatchingArrivalTimes(Double userInputOfTime)
 	{
 		//check user input is valid
 		StopTimes currentStopTimes;
-		int currentStopID;
+		int currentTripID;
 		for (int i = 0; i < stopTimesArray.size(); i ++)
 		{
 			currentStopTimes = stopTimesArray.get(i);
 			if (currentStopTimes.arrivalTime == userInputOfTime)
 			{
 				//add to new valid arraylist
-				currentStopID = currentStopTimes.stopID;
+				currentTripID = currentStopTimes.tripID;
 				//find stop with that ID
-				for (int j = 0; j < stopsArray.size(); j++)
+				for (int j = 0; j < stopTimesArray.size(); j++)
 				{
-					if (currentStopID == stopsArray.get(i).id)
+					if (currentTripID == stopTimesArray.get(i).stopID)
 					{
-						stopsThatMatchArrivalTime.add(stopsArray.get(i));
-						//add the stop to the arraylist of all stops that arrive at that given time
+						tripsThatMatchArrivalTime.add(stopTimesArray.get(i));
+						//add the trip to the arraylist of all trips that arrive at that given time
 					}
 				}
 			}
 		}
-		return stopsThatMatchArrivalTime;
+		return tripsThatMatchArrivalTime;
 	}
-	public static void arrayListSortedByStopID(ArrayList <StopTimes> stopsThatMatchArrivalTime)
+	public static void arrayListSortedByStopID(ArrayList <StopTimes> tripsThatMatchArrivalTime)
 	{
 		//MUST PASS IN AN ARRAY OF TYPE STOP TIMES (NOT STOPS)
-		Collections.sort(stopsThatMatchArrivalTime);
+		Collections.sort(tripsThatMatchArrivalTime);
 		//implemented comparable interface and made a sort by ID method
 		//might not work
 	}
 	
-	public static void arrayListToString(ArrayList <Stops> stopsThatMatchArrivalTime)
+	public static void arrayListToString(ArrayList <Stops> tripsThatMatchArrivalTime)
 	{
 		Stops currentStop;
 		//make sure this array that is read in is sorted
-		for (int i = 0; i < stopsThatMatchArrivalTime.size(); i ++)
+		for (int i = 0; i < tripsThatMatchArrivalTime.size(); i ++)
 		{
-			currentStop = stopsThatMatchArrivalTime.get(i);
+			currentStop = tripsThatMatchArrivalTime.get(i);
 			//print out all elements of the stops that match (already sorted).
 			
 			System.out.println("ID: " + currentStop.id + " code: " + currentStop.code + " name " + currentStop.name + " description " + currentStop.description + " latitude " + currentStop.latitude + " longitude " + currentStop.longitude + " zone ID " + currentStop.zoneID + " Location Type " + currentStop.locationType);

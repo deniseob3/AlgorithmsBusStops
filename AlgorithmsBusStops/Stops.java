@@ -1,6 +1,6 @@
 
-public class Stops {
-	public int id;
+public class Stops implements Comparable<Stops> {
+	public static int id;
 	public int code;
 	public String name;
 	public String description;
@@ -10,7 +10,7 @@ public class Stops {
 	public String url; //type of url??
 	public int locationType;
 	public int parentStation;
-	
+
 	Stops(int id, int code, String name, String description, double latitude, double longitude, int zoneID, String url, int locationType, int parentStation)
 	{
 		//creating a stop
@@ -25,7 +25,16 @@ public class Stops {
 		this.locationType = locationType;
 		this.parentStation = parentStation;
 	}
-	
-	
-	
+
+	@Override
+	public int compareTo(Stops compareStop) {
+		// TODO Auto-generated method stub
+		int compareID =((Stops)compareStop).id;
+		/* For Ascending order*/
+		return Stops.id-compareID;
+
+	}
+
+
+
 }

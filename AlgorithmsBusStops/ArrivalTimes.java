@@ -1,5 +1,7 @@
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Scanner;
 
 public class ArrivalTimes {
@@ -104,6 +106,24 @@ public class ArrivalTimes {
 			}
 		}
 		return stopsThatMatchArrivalTime;
+	}
+	public static void arrayListSortedByStopID(ArrayList <Stops> stopsThatMatchArrivalTime)
+	{
+		Collections.sort(stopsThatMatchArrivalTime);
+		//implemented comparable interface and made a sort by ID method
+		//might not work
+	}
+	
+	public static void arrayListToString(ArrayList <Stops> stopsThatMatchArrivalTime)
+	{
+		Stops currentStop;
+		for (int i = 0; i < stopsThatMatchArrivalTime.size(); i ++)
+		{
+			currentStop = stopsThatMatchArrivalTime.get(i);
+			//print out all elements of the stops that match (already sorted).
+			
+			System.out.println("ID: " + currentStop.id + " code: " + currentStop.code + " name " + currentStop.name);
+		}
 	}
 
 	public static void main(String[] args) {

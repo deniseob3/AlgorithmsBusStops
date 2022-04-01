@@ -114,6 +114,21 @@ public class ShortestPath {
 			}
 
 	}
+	
+	
+	public static int costWithEdge(String filename)
+	{
+		int cost = 0;
+		if (filename == "stop_times.txt")
+		{
+			cost = 1;
+		}
+		if (filename == "transfers.txt")
+		{
+			//2 or time/100
+		}
+		return cost;
+	}
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub

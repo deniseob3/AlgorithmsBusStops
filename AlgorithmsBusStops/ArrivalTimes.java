@@ -161,12 +161,15 @@ public class ArrivalTimes {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		
+		System.out.print("enter a time: ");
+		Scanner input = new Scanner(System.in);
+		String userTime = input.next();
 		ArrivalTimes at = new ArrivalTimes("stop_times.txt");
 		ArrayList <StopTimes> arrayListSorted = new ArrayList <StopTimes>();
-		arrayListSorted = at.findingMatchingArrivalTimes("20:00:00");
+		arrayListSorted = at.findingMatchingArrivalTimes(userTime);
 		arrayListSortedByStopID(arrayListSorted);
 		arrayListStopTimesToString(arrayListSorted);
+		//running this file????
 		
 		
 		

@@ -153,7 +153,7 @@ public class ArrivalTimes {
 		{
 			currentTrip = tripsThatMatchArrivalTime.get(i);
 			//print out all elements of the stops that match (already sorted).
-			
+			//
 			System.out.println("Trip ID: " + currentTrip.tripID + " arrival time: " + currentTrip.arrivalTime + " departure time " + currentTrip.departureTime + " stop ID " + currentTrip.stopID + " stop sequence " + currentTrip.stopSequence + " stop head sign " + currentTrip.stopHeadSign + " pickup type " + currentTrip.pickupType + "  drop off type " + currentTrip.dropOffType + " shape dist travelled " + currentTrip.shapeDistTravelled);
 			//print all info about the trips which match the arrival time
 		}

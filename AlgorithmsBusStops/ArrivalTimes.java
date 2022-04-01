@@ -1,4 +1,6 @@
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
@@ -12,7 +14,7 @@ public class ArrivalTimes {
 	//just stop times array
 	//pretty sure stops array is not needed here. Keep code for somewhere else
 	
-	ArrivalTimes(String filenameStopTimes)
+	ArrivalTimes(String filenameStopTimes) throws IOException
 	{
 		//read in stop file and assign it to a 2d array
 		/*if (filenameStops !=null && filenameStops != "")
@@ -53,8 +55,8 @@ public class ArrivalTimes {
 		
 		if (filenameStopTimes!= null && filenameStopTimes != "")
 		{
-			try {
-				File file2 = new File("\"C:\\Users\\denis\\OneDrive\\Desktop\\MSISS 2nd year\\Algorithms and Data Structures 1\\AlgorithmsCode\\AlgorithmsBusStops\\stop_times.txt\"");
+			//try {
+				File file2 = new File("./stop_times.txt");
 				Scanner scanner2 = new Scanner(file2);
 				int i = 0;
 				
@@ -71,7 +73,7 @@ public class ArrivalTimes {
 						if ((validateUserInput(line[1]) == true) && (validateUserInput(line[2]) == true))
 						{
 							//only add valid times to the list
-							StopTimes currentStopTime = new StopTimes(Integer.parseInt(line[0]),line[1], line[2], Integer.parseInt(line[3]), Integer.parseInt(line[4]), line[5], Integer.parseInt(line[6]), Integer.parseInt(line[7]), Double.parseDouble(line[8]) );
+							StopTimes currentStopTime = new StopTimes(Integer.parseInt(line[0]),line[1], line[2], Integer.parseInt(line[3]), Integer.parseInt(line[4]), line[5], Integer.parseInt(line[6]), Integer.parseInt(line[7]) );
 							stopTimesArray.add(currentStopTime);
 						}
 						
@@ -81,10 +83,10 @@ public class ArrivalTimes {
 				scanner2.close();
 				
 			}
-			catch(Exception e)
+			//catch(Exception e)
 			{
-				System.out.print("Invalid file name: stop times");
-			}
+				//System.out.print("Invalid file name: stop times");
+		//	}
 		}
 	}
 	public static boolean validateUserInput(String userInput)
@@ -154,12 +156,12 @@ public class ArrivalTimes {
 			currentTrip = tripsThatMatchArrivalTime.get(i);
 			//print out all elements of the stops that match (already sorted).
 			//
-			System.out.println("Trip ID: " + currentTrip.tripID + " arrival time: " + currentTrip.arrivalTime + " departure time " + currentTrip.departureTime + " stop ID " + currentTrip.stopID + " stop sequence " + currentTrip.stopSequence + " stop head sign " + currentTrip.stopHeadSign + " pickup type " + currentTrip.pickupType + "  drop off type " + currentTrip.dropOffType + " shape dist travelled " + currentTrip.shapeDistTravelled);
+			System.out.println("Trip ID: " + currentTrip.tripID + " arrival time: " + currentTrip.arrivalTime + " departure time " + currentTrip.departureTime + " stop ID " + currentTrip.stopID + " stop sequence " + currentTrip.stopSequence + " stop head sign " + currentTrip.stopHeadSign + " pickup type " + currentTrip.pickupType + "  drop off type " + currentTrip.dropOffType + " shape dist travelled");
 			//print all info about the trips which match the arrival time
 		}
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		// TODO Auto-generated method stub
 		System.out.print("enter a time: ");
 		Scanner input = new Scanner(System.in);
@@ -169,8 +171,15 @@ public class ArrivalTimes {
 		arrayListSorted = at.findingMatchingArrivalTimes(userTime);
 		arrayListSortedByStopID(arrayListSorted);
 		arrayListStopTimesToString(arrayListSorted);
+		
+		//for (int i= 0; i < arrayListSorted.size(); i++)
+		//{
+			//System.out.println(arrayListSorted.get(i));
+		//}
 		//running this file????
 		//
+		
+		//terminating after 10 seconds
 		
 		
 

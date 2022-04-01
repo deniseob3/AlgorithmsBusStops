@@ -68,7 +68,7 @@ public class ShortestPath {
 						//if ((validateUserInput(line[1]) == true) && (validateUserInput(line[2]) == true))
 						{
 							//only add valid times to the list
-							StopTimes currentStopTime = new StopTimes(Integer.parseInt(line[0]),line[1], line[2], Integer.parseInt(line[3]), Integer.parseInt(line[4]), line[5], Integer.parseInt(line[6]), Integer.parseInt(line[7]), Double.parseDouble(line[8]) );
+							StopTimes currentStopTime = new StopTimes(Integer.parseInt(line[0]),line[1], line[2], Integer.parseInt(line[3]), Integer.parseInt(line[4]), line[5], Integer.parseInt(line[6]), Integer.parseInt(line[7]) );
 							stopTimesArray.add(currentStopTime);
 						}
 

@@ -9,9 +9,9 @@ public class StopTimes implements Comparable <StopTimes>{
 	public String stopHeadSign;
 	public int pickupType;
 	public int dropOffType;
-	public double shapeDistTravelled;
+	//public double shapeDistTravelled;
 	
-	StopTimes(int tripID, String arrivalTime, String departureTime, int stopID, int stopSequence, String stopHeadSign, int pickupType, int dropOffType, double shapeDistTravelled)
+	StopTimes(int tripID, String arrivalTime, String departureTime, int stopID, int stopSequence, String stopHeadSign, int pickupType, int dropOffType)
 	{
 		StopTimes.tripID = tripID;
 		this.arrivalTime = arrivalTime;
@@ -21,7 +21,7 @@ public class StopTimes implements Comparable <StopTimes>{
 		this.stopHeadSign = stopHeadSign;
 		this.pickupType= pickupType;
 		this.dropOffType = dropOffType;
-		this.shapeDistTravelled = shapeDistTravelled;
+		//this.shapeDistTravelled = shapeDistTravelled;
 	}
 
 	@Override

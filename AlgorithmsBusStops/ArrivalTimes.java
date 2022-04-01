@@ -163,6 +163,13 @@ public class ArrivalTimes {
 		// TODO Auto-generated method stub
 		
 		ArrivalTimes at = new ArrivalTimes("stop_times.txt");
+		ArrayList <StopTimes> arrayListSorted = new ArrayList <StopTimes>();
+		arrayListSorted = at.findingMatchingArrivalTimes("20:00:00");
+		arrayListSortedByStopID(arrayListSorted);
+		arrayListStopTimesToString(arrayListSorted);
+		
+		
+		
 
 	}
 

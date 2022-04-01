@@ -54,7 +54,7 @@ public class ArrivalTimes {
 		if (filenameStopTimes!= null && filenameStopTimes != "")
 		{
 			try {
-				File file2 = new File(filenameStopTimes);
+				File file2 = new File("\"C:\\Users\\denis\\OneDrive\\Desktop\\MSISS 2nd year\\Algorithms and Data Structures 1\\AlgorithmsCode\\AlgorithmsBusStops\\stop_times.txt\"");
 				Scanner scanner2 = new Scanner(file2);
 				int i = 0;
 				

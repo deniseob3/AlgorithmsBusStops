@@ -5,17 +5,17 @@ import java.util.Scanner;
 
 public class ArrivalTimes {
 	//class variables
-	static ArrayList <Stops> stopsArray = new ArrayList<Stops>();
+	//static ArrayList <Stops> stopsArray = new ArrayList<Stops>();
 	static ArrayList<StopTimes> stopTimesArray = new ArrayList<StopTimes>();
 	static ArrayList<StopTimes> tripsThatMatchArrivalTime = new ArrayList<StopTimes>();
 	//each element of the arraylist stores an object of type stops
 	//just stop times array
 	//pretty sure stops array is not needed here. Keep code for somewhere else
 	
-	ArrivalTimes(String filenameStops, String filenameStopTimes)
+	ArrivalTimes(String filenameStopTimes)
 	{
 		//read in stop file and assign it to a 2d array
-		if (filenameStops !=null && filenameStops != "")
+		/*if (filenameStops !=null && filenameStops != "")
 		{
 			try {
 				File file = new File(filenameStops);
@@ -49,7 +49,7 @@ public class ArrivalTimes {
 			{
 				System.out.print("Invalid file name stops");
 			}
-		}
+		}*/
 		
 		if (filenameStopTimes!= null && filenameStopTimes != "")
 		{
@@ -67,8 +67,13 @@ public class ArrivalTimes {
 					}
 					else
 					{
-						StopTimes currentStopTime = new StopTimes(Integer.parseInt(line[0]), Double.parseDouble(line[1]), Double.parseDouble(line[2]), Integer.parseInt(line[3]), Integer.parseInt(line[4]), line[5], Integer.parseInt(line[6]), Integer.parseInt(line[7]), Double.parseDouble(line[8]) );
-						stopTimesArray.add(currentStopTime);
+						//check arrival time valid and departure time valid
+						if ((validateUserInput(line[1]) == true) && (validateUserInput(line[2]) == true))
+						{
+							//only add valid times to the list
+							StopTimes currentStopTime = new StopTimes(Integer.parseInt(line[0]),line[1], line[2], Integer.parseInt(line[3]), Integer.parseInt(line[4]), line[5], Integer.parseInt(line[6]), Integer.parseInt(line[7]), Double.parseDouble(line[8]) );
+							stopTimesArray.add(currentStopTime);
+						}
 						
 					}
 					i++;
@@ -101,17 +106,19 @@ public class ArrivalTimes {
 		//otherwise skip.
 	}
 	
-	public static ArrayList <StopTimes> findingMatchingArrivalTimes(int userInputOfTime)
+	public static ArrayList <StopTimes> findingMatchingArrivalTimes(String userInputOfTime)
 	{
 		//check user input is valid
+		if (validateUserInput(userInputOfTime) == true) {
 		StopTimes currentStopTimes;
 		int currentTripID;
 		for (int i = 0; i < stopTimesArray.size(); i ++)
 		{
 			currentStopTimes = stopTimesArray.get(i);
 			if (currentStopTimes.arrivalTime == userInputOfTime)
+				//two equal strings could cause problems possibly .equals?
 			{
-				//add to new valid arraylist
+				//add to new matching arrival time to the arraylist
 				currentTripID = currentStopTimes.tripID;
 				//find stop with that ID
 				for (int j = 0; j < stopTimesArray.size(); j++)
@@ -125,6 +132,10 @@ public class ArrivalTimes {
 			}
 		}
 		return tripsThatMatchArrivalTime;
+		}
+		else {
+			return null;//return null if user inputs an invalid time
+		}
 	}
 	public static void arrayListSortedByStopID(ArrayList <StopTimes> tripsThatMatchArrivalTime)
 	{
@@ -150,6 +161,8 @@ public class ArrivalTimes {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		
+		ArrivalTimes at = new ArrivalTimes("stop_times.txt");
 
 	}
 

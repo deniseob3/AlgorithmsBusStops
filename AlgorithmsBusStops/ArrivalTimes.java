@@ -11,51 +11,13 @@ public class ArrivalTimes {
 	static ArrayList<StopTimes> stopTimesArray = new ArrayList<StopTimes>();
 	static ArrayList<StopTimes> tripsThatMatchArrivalTime = new ArrayList<StopTimes>();
 	//each element of the arraylist stores an object of type stops
-	//just stop times array
-	//pretty sure stops array is not needed here. Keep code for somewhere else
 	
 	ArrivalTimes(String filenameStopTimes) throws IOException
 	{
-		//read in stop file and assign it to a 2d array
-		/*if (filenameStops !=null && filenameStops != "")
-		{
-			try {
-				File file = new File(filenameStops);
-				Scanner scanner = new Scanner(file);
-				int i = 0;
-					
-				while(scanner.hasNextLine())
-				{
-					String [] line = scanner.nextLine().trim().split(",");
-					//split each input line by commas
-					//How big is the 2d array??/1d array (arraylist??)
-					if (i == 0)
-					{
-						//column headings
-						//do nothing with these
-					}
-					else
-					{
-						//store these values
-						//create a stop object with each line of the file
-						// add to the end of the arraylist
-						Stops currentStop = new Stops(Integer.parseInt(line[0]), Integer.parseInt(line[1]), line[2], line[3], Double.parseDouble(line[4]), Double.parseDouble(line[5]), Integer.parseInt(line[6]), line[7], Integer.parseInt(line[8]), Integer.parseInt(line[9]));
-						stopsArray.add(currentStop);
-					
-					}
-					i++;
-				}
-				scanner.close();
-			}
-			catch (Exception e)
-			{
-				System.out.print("Invalid file name stops");
-			}
-		}*/
 		
 		if (filenameStopTimes!= null && filenameStopTimes != "")
 		{
-			//try {
+			try {
 				File file2 = new File("./stop_times.txt");
 				Scanner scanner2 = new Scanner(file2);
 				int i = 0;
@@ -83,10 +45,10 @@ public class ArrivalTimes {
 				scanner2.close();
 				
 			}
-			//catch(Exception e)
+			catch(Exception e)
 			{
-				//System.out.print("Invalid file name: stop times");
-		//	}
+				System.out.print("Invalid file name: stop times");
+			}
 		}
 	}
 	public static boolean validateUserInput(String userInput)
@@ -101,11 +63,6 @@ public class ArrivalTimes {
 			valid = false;
 		}
 		return valid;
-		//must validate the times in the file too!!
-		//in the constructor before I read it into the array, 
-		//validate each entry using the same function
-		//only add it to the array if it is valid entry
-		//otherwise skip.
 	}
 	
 	public static ArrayList <StopTimes> findingMatchingArrivalTimes(String userInputOfTime)
@@ -117,7 +74,7 @@ public class ArrivalTimes {
 		for (int i = 0; i < stopTimesArray.size(); i ++)
 		{
 			currentStopTimes = stopTimesArray.get(i);
-			if (currentStopTimes.arrivalTime == userInputOfTime)
+			if (currentStopTimes.arrivalTime.equals(userInputOfTime))
 				//two equal strings could cause problems possibly .equals?
 			{
 				//add to new matching arrival time to the arraylist
@@ -172,12 +129,6 @@ public class ArrivalTimes {
 		arrayListSortedByStopID(arrayListSorted);
 		arrayListStopTimesToString(arrayListSorted);
 		
-		//for (int i= 0; i < arrayListSorted.size(); i++)
-		//{
-			//System.out.println(arrayListSorted.get(i));
-		//}
-		//running this file????
-		//
 		
 		//terminating after 10 seconds
 		//file opening but not doing anything

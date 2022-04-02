@@ -26,7 +26,6 @@ public class ShortestPath {
 				{
 					String [] line = scanner.nextLine().trim().split(",");
 					//split each input line by commas
-					//How big is the 2d array??/1d array (arraylist??)
 					if (i == 0)
 					{
 						//column headings
@@ -34,9 +33,8 @@ public class ShortestPath {
 					}
 					else
 					{
-						//store these values
 						//create a stop object with each line of the file
-						// add to the end of the arraylist
+						
 						Stops currentStop = new Stops(Integer.parseInt(line[0]), Integer.parseInt(line[1]), line[2], line[3], Double.parseDouble(line[4]), Double.parseDouble(line[5]), Integer.parseInt(line[6]), line[7], Integer.parseInt(line[8]), Integer.parseInt(line[9]));
 						stopsArray.add(currentStop);
 

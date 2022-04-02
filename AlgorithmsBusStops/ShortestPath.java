@@ -6,6 +6,9 @@ public class ShortestPath {
 	ArrayList <Stops> stopsArray = new ArrayList<Stops>();
 	ArrayList<StopTimes> stopTimesArray = new ArrayList<StopTimes>();
 	ArrayList<Transfers> transfersArray = new ArrayList <Transfers>();
+	double [][] distanceTo = new double [stopsArray.size()][stopsArray.size()];
+	//number of stops = vertices
+	double [][] edgeTo = new double [stopsArray.size()][stopsArray.size()];
 
 
 	ShortestPath(String stopFilename, String stopTimesFilename, String transfersFilename)
@@ -116,18 +119,46 @@ public class ShortestPath {
 	}
 	
 	
-	public static int costWithEdge(String filename)
+	
+	public void shortestPath(int v)
 	{
-		int cost = 0;
-		if (filename == "stop_times.txt")
+		//v = origin
+		boolean [] sptSet = new boolean[distanceTo.length];
+		sptSet[v] = true;
+		while(true)
 		{
-			cost = 1;
+			int x = -1;
+			for(int i = 0; i < distanceTo.length; i ++) 
+			{
+				//Break when new vertice is found
+				if((sptSet[i] == false) && (distanceTo[v][i] != Integer.MAX_VALUE))
+				{
+					x = i;
+					break; 
+				}
+			}
+
+			if(x == -1)
+			{
+				return;
+			}
+
+			sptSet[x] = true;
+
+			for(int i = 0; i < distanceTo.length; i++)
+			{
+				if(distanceTo[v][x] + distanceTo[x][i] < distanceTo[v][i])
+				{
+					distanceTo[v][i] = distanceTo[v][x] + distanceTo[x][i];
+					sptSet[i] = false;
+					edgeTo[v][i] = x;
+					//directedEdge[v][i]
+					//wrong
+				}
+			}
+
 		}
-		if (filename == "transfers.txt")
-		{
-			//2 or time/100
-		}
-		return cost;
+	
 	}
 
 	public static void main(String[] args) {

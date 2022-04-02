@@ -3,9 +3,10 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class BusStopByName {
-	ArrayList <Stops> stopsArray = new ArrayList<Stops>();
+	static ArrayList <Stops> stopsArray = new ArrayList<Stops>();
 	//ArrayList <Stops> movedPrefixesArray = new ArrayList <Stops>();
-	ArrayList<Stops> stopsThatMatchArray = new ArrayList <Stops>();
+	static ArrayList<Stops> stopsThatMatchArray = new ArrayList <Stops>();
+	static TST<String> tst = new TST<String>();
 
 	//read in stops file
 	BusStopByName(String stopFilename) {
@@ -73,6 +74,7 @@ public class BusStopByName {
 					//add the prefix to the end
 					newName+=line[0];
 					currentStop.name = newName;
+					//TST.put(currentStop.name, stopsArray);
 				}
 			}
 		}
@@ -84,9 +86,19 @@ public class BusStopByName {
 	public static ArrayList<String> checkingMatches(String userInput)
 	{
 		//USE TST
-		
+		//validate user input??
+		stopsThatMatchArray.add((Stops) tst.keysWithPrefix(userInput));
+		//??????
 		return null;
 	
+	}
+	public static void creatingTST(ArrayList<String> stopsArray)
+	{
+		for (int i = 0; i < stopsArray.size(); i++)
+		{
+			tst.put(stopsArray.get(i), stopsArray.get(i));
+			//key = value
+		}
 	}
 
 

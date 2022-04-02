@@ -9,6 +9,7 @@ public class ShortestPath {
 	double [][] distanceTo = new double [stopsArray.size()][stopsArray.size()];
 	//number of stops = vertices
 	double [][] edgeTo = new double [stopsArray.size()][stopsArray.size()];
+	ArrayList <Stops> route = new ArrayList<Stops>();
 
 
 	ShortestPath(String stopFilename, String stopTimesFilename, String transfersFilename)

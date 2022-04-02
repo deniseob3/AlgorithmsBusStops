@@ -23,7 +23,7 @@ public class ArrivalTimes {
 				File file = new File(filenameStops);
 				Scanner scanner = new Scanner(file);
 				int i = 0;
-
+					//committing
 				while(scanner.hasNextLine())
 				{
 					String [] line = scanner.nextLine().trim().split(",");

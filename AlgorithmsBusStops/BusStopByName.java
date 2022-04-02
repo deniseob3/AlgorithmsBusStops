@@ -5,6 +5,7 @@ import java.util.Scanner;
 public class BusStopByName {
 	ArrayList <Stops> stopsArray = new ArrayList<Stops>();
 	//ArrayList <Stops> movedPrefixesArray = new ArrayList <Stops>();
+	ArrayList<Stops> stopsThatMatchArray = new ArrayList <Stops>();
 
 	//read in stops file
 	BusStopByName(String stopFilename) {
@@ -75,12 +76,26 @@ public class BusStopByName {
 				}
 			}
 		}
+		
+		
 
+	}
+	
+	public static ArrayList<String> checkingMatches(String userInput)
+	{
+		//USE TST
+		
+		return null;
+	
 	}
 
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		System.out.print("Enter the stop name");
+		Scanner input = new Scanner(System.in);
+		String userInput = input.next();
+		
 
 	}
 

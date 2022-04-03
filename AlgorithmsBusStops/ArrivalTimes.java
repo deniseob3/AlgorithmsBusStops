@@ -6,8 +6,7 @@ import java.util.Collections;
 import java.util.Scanner;
 
 public class ArrivalTimes {
-	//class variables
-	//static ArrayList <Stops> stopsArray = new ArrayList<Stops>();
+	
 	static ArrayList<StopTimes> stopTimesArray = new ArrayList<StopTimes>();
 	static ArrayList<StopTimes> tripsThatMatchArrivalTime = new ArrayList<StopTimes>();
 	//each element of the arraylist stores an object of type stops
@@ -43,6 +42,7 @@ public class ArrivalTimes {
 					i++;
 				}
 				scanner2.close();
+				System.out.println("Constructor done");
 				
 			}
 			catch(Exception e)
@@ -55,7 +55,7 @@ public class ArrivalTimes {
 	{
 		boolean valid = true;
 		String [] line = userInput.trim().split(":");
-		int hours = Integer.parseInt(line[0]);
+		int hours = Integer.parseInt(line[0]); //if is an integer??
 		int minutes = Integer.parseInt(line[1]);
 		int seconds = Integer.parseInt(line[2]);
 		if ((hours > 23)|| (minutes > 59) || (seconds > 59))
@@ -69,6 +69,7 @@ public class ArrivalTimes {
 	{
 		//check user input is valid
 		if (validateUserInput(userInputOfTime) == true) {
+			System.out.println("completed validate user input");
 		StopTimes currentStopTimes;
 		int currentTripID;
 		for (int i = 0; i < stopTimesArray.size(); i ++)
@@ -82,14 +83,16 @@ public class ArrivalTimes {
 				//find stop with that ID
 				for (int j = 0; j < stopTimesArray.size(); j++)
 				{
-					if (currentTripID == stopTimesArray.get(i).stopID)
+					if (currentTripID == stopTimesArray.get(j).stopID)
 					{
-						tripsThatMatchArrivalTime.add(stopTimesArray.get(i));
+						//loop through stop times array to find all the ID's that match
+						tripsThatMatchArrivalTime.add(stopTimesArray.get(j));
 						//add the trip to the arraylist of all trips that arrive at that given time
 					}
 				}
 			}
 		}
+		System.out.println("Completed finding matching");
 		return tripsThatMatchArrivalTime;
 		}
 		else {
@@ -100,6 +103,7 @@ public class ArrivalTimes {
 	{
 		//MUST PASS IN AN ARRAY OF TYPE STOP TIMES (NOT STOPS)
 		Collections.sort(tripsThatMatchArrivalTime);
+		System.out.println("sorted = done");
 		//implemented comparable interface and made a sort by ID method
 		//might not work
 	}
@@ -116,6 +120,7 @@ public class ArrivalTimes {
 			System.out.println("Trip ID: " + currentTrip.tripID + " arrival time: " + currentTrip.arrivalTime + " departure time " + currentTrip.departureTime + " stop ID " + currentTrip.stopID + " stop sequence " + currentTrip.stopSequence + " stop head sign " + currentTrip.stopHeadSign + " pickup type " + currentTrip.pickupType + "  drop off type " + currentTrip.dropOffType + " shape dist travelled");
 			//print all info about the trips which match the arrival time
 		}
+		System.out.println("To string method done");
 	}
 
 	public static void main(String[] args) throws IOException {
@@ -123,7 +128,7 @@ public class ArrivalTimes {
 		System.out.print("enter a time: ");
 		Scanner input = new Scanner(System.in);
 		String userTime = input.next();
-		ArrivalTimes at = new ArrivalTimes("stop_times.txt");
+		ArrivalTimes at = new ArrivalTimes("\stop_times.txt");
 		ArrayList <StopTimes> arrayListSorted = new ArrayList <StopTimes>();
 		arrayListSorted = at.findingMatchingArrivalTimes(userTime);
 		arrayListSortedByStopID(arrayListSorted);

@@ -3,16 +3,12 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class ShortestPath {
-	ArrayList <Stops> stopsArray = new ArrayList<Stops>();
-	ArrayList<StopTimes> stopTimesArray = new ArrayList<StopTimes>();
-	ArrayList<Transfers> transfersArray = new ArrayList <Transfers>();
-	//double [][] distanceTo = new double [stopsArray.size()][stopsArray.size()];
-	//number of stops = vertices
-	//double [][] edgeTo = new double [stopsArray.size()][stopsArray.size()];
-	ArrayList <Stops> route = new ArrayList<Stops>();
-	ArrayList <DirectedEdge> directedEdgesArray = new ArrayList<DirectedEdge>();
-	//boolean [][] directedEdge = new boolean [stopsArray.size()][stopsArray.size()];
-	//there either is or isn't a directed edge between 2 points
+	static ArrayList <Stops> stopsArray = new ArrayList<Stops>();
+	static ArrayList<StopTimes> stopTimesArray = new ArrayList<StopTimes>();
+	static ArrayList<Transfers> transfersArray = new ArrayList <Transfers>();
+	static ArrayList <Stops> route = new ArrayList<Stops>();
+	static ArrayList <DirectedEdge> directedEdgesArray = new ArrayList<DirectedEdge>();
+	static double [][] distanceTo = new double[stopsArray.size()][stopsArray.size()];
 
 
 
@@ -23,7 +19,7 @@ public class ShortestPath {
 		if (stopFilename !=null && stopFilename != "")
 		{
 			try {
-				File file = new File(stopFilename);
+				File file = new File("./stops.txt");
 				Scanner scanner = new Scanner(file);
 				int i = 0;
 
@@ -57,7 +53,7 @@ public class ShortestPath {
 		if (stopTimesFilename!= null && stopTimesFilename != "")
 		{
 			try {
-				File file2 = new File(stopTimesFilename);
+				File file2 = new File("./stop_times.txt");
 				Scanner scanner2 = new Scanner(file2);
 				int i = 0;
 
@@ -106,7 +102,7 @@ public class ShortestPath {
 		//transfers
 		if ((transfersFilename != null)&& (transfersFilename !=""))
 			try {
-				File file3 = new File(transfersFilename);
+				File file3 = new File("transfers.txt");
 				Scanner scanner3 = new Scanner(file3);
 				int i = 0;
 				int cost = 0;
@@ -149,6 +145,64 @@ public class ShortestPath {
 		}
 
 	}
+	
+	public static void making2DArray()
+	{
+		//two for loops
+		Stops currentOrigin;
+		Stops currentDestination;
+		for (int i = 0; i < stopsArray.size(); i++)
+		{
+			for (int j = 0; j < stopsArray.size(); j++)
+			{
+				for (int k = 0; k < directedEdgesArray.size(); k++)
+				{
+					currentOrigin = stopsArray.get(i);
+					currentDestination = stopsArray.get(j);
+					if ((directedEdgesArray.get(k).fromID == currentOrigin.id)&&(directedEdgesArray.get(k).toID == currentDestination.id))
+					{
+						//if there is a directed edge between current origin and current destination
+						distanceTo[i][j] = directedEdgesArray.get(k).cost;
+					}
+					else
+					{
+						distanceTo[i][j] = Integer.MAX_VALUE;
+					}
+				}
+			}
+		}
+	}
+	
+	public static void shortestPath(int fromStopID, int toStopId)
+	{
+		int k = fromStopID;
+		boolean[] shortestPath = new boolean[distanceTo.length];
+		shortestPath[k] = true;
+		while (true) {
+			int x = -1;
+			//check what is i?? need it to be the ID of all the possible stops
+			//doesn't start at 0
+			for (int i = 0; i < distanceTo.length; i++) {
+				if ((shortestPath[i] == false) && (distanceTo[k][i] !=Integer.MAX_VALUE)) {
+					x = i;
+					break; // break as new vertex is found
+				}
+			}
+			if (x == -1) {
+				return;
+			}
+			shortestPath[x] = true;
+
+			for (int i = 0; i < distanceTo.length; i++) {
+				if (distanceTo[k][x] + distanceTo[x][i] < distanceTo[k][i]) {
+					distanceTo[k][i] = distanceTo[k][x] + distanceTo[x][i];
+					shortestPath[i] = false;
+					//edgeTo[k][i] = x;
+				}
+			}
+		}
+
+	}
 
 
 
@@ -157,7 +211,22 @@ public class ShortestPath {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		ShortestPath st = new ShortestPath("stops", "stop_times", "transfers");
+		making2DArray();
+		//create the 2d array
+		
+		System.out.println("Enter the origin stop");
+		Scanner input = new Scanner(System.in);
+		int originStop = input.nextInt();
+		System.out.println("Enter the destination stop");
+		int destination = input.nextInt();
+		
+		shortestPath(originStop, destination);
 
+		for (int i =0; i < distanceTo.length; i++)
+		{
+			
+		}
 	}
 
 }

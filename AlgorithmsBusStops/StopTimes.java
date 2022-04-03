@@ -29,7 +29,8 @@ public class StopTimes implements Comparable <StopTimes>{
 			
 			int compareID =((StopTimes)compareTrips).tripID;
 			/* For Ascending order*/
-			return tripID-compareID;
+			//return tripID-compareID;
+			return 0;
 	}
 	 
 }

@@ -10,6 +10,7 @@ public class ShortestPath {
 	//number of stops = vertices
 	//double [][] edgeTo = new double [stopsArray.size()][stopsArray.size()];
 	ArrayList <Stops> route = new ArrayList<Stops>();
+	ArrayList <DirectedEdge> directedEdgesArray = new ArrayList<DirectedEdge>();
 	//boolean [][] directedEdge = new boolean [stopsArray.size()][stopsArray.size()];
 	//there either is or isn't a directed edge between 2 points
 
@@ -76,12 +77,24 @@ public class ShortestPath {
 							//only add valid times to the list
 							StopTimes currentStopTime = new StopTimes(Integer.parseInt(line[0]),line[1], line[2], Integer.parseInt(line[3]), Integer.parseInt(line[4]), line[5], Integer.parseInt(line[6]), Integer.parseInt(line[7]) );
 							stopTimesArray.add(currentStopTime);
+							//DirectedEdge currentEdge = new DirectedEdge(Integer.parseInt(line[0]), Integer.parseInt(line[0]), cost);
 						}
 
 					}
 					i++;
 				}
 				scanner2.close();
+				for (int k = 1; k <= stopTimesArray.size(); k ++)
+				{
+					if (stopTimesArray.get(k-1).tripID == (stopTimesArray.get(k).tripID))
+						//if two consecutive trips have the same ID
+					{
+						DirectedEdge currentEdge = new DirectedEdge(stopTimesArray.get(k-1).stopID, stopTimesArray.get(k).stopID, 1);
+						//cost is 1 from stop times file
+						directedEdgesArray.add(currentEdge);
+						
+					}
+				}
 
 			}
 			catch(Exception e)
@@ -96,6 +109,7 @@ public class ShortestPath {
 				File file3 = new File(transfersFilename);
 				Scanner scanner3 = new Scanner(file3);
 				int i = 0;
+				int cost = 0;
 				//Transfers currentTransfer;
 
 				while(scanner3.hasNextLine())
@@ -112,6 +126,19 @@ public class ShortestPath {
 						transfersArray.add(currentTransfer);
 						//directedEdge[Integer.parseInt(line[0])][Integer.parseInt(line[1])] = true;
 						//directed edge from to is true
+						int transferType = Integer.parseInt(line[2]);
+						if (transferType == 0)
+						{
+							cost = 2;
+						}
+						if (transferType == 2)
+						{
+							cost = (Integer.parseInt(line[3]))/100;
+							//cost = minimum transfer time /100
+						}
+						DirectedEdge currentEdge = new DirectedEdge(Integer.parseInt(line[0]), Integer.parseInt(line[0]), cost);
+						//creates directed edge between the two edges
+						directedEdgesArray.add(currentEdge);
 					}
 				}
 

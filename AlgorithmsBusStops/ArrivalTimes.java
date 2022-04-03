@@ -42,7 +42,6 @@ public class ArrivalTimes {
 					i++;
 				}
 				scanner2.close();
-				System.out.println("Constructor done");
 				
 			}
 			catch(Exception e)
@@ -69,7 +68,6 @@ public class ArrivalTimes {
 	{
 		//check user input is valid
 		if (validateUserInput(userInputOfTime) == true) {
-			System.out.println("completed validate user input");
 		StopTimes currentStopTimes;
 		int currentTripID;
 		for (int i = 0; i < stopTimesArray.size(); i ++)
@@ -92,7 +90,6 @@ public class ArrivalTimes {
 				}
 			}
 		}
-		System.out.println("Completed finding matching");
 		return tripsThatMatchArrivalTime;
 		}
 		else {
@@ -103,7 +100,7 @@ public class ArrivalTimes {
 	{
 		//MUST PASS IN AN ARRAY OF TYPE STOP TIMES (NOT STOPS)
 		Collections.sort(tripsThatMatchArrivalTime);
-		System.out.println("sorted = done");
+		
 		//implemented comparable interface and made a sort by ID method
 		//might not work
 	}
@@ -120,7 +117,6 @@ public class ArrivalTimes {
 			System.out.println("Trip ID: " + currentTrip.tripID + " arrival time: " + currentTrip.arrivalTime + " departure time " + currentTrip.departureTime + " stop ID " + currentTrip.stopID + " stop sequence " + currentTrip.stopSequence + " stop head sign " + currentTrip.stopHeadSign + " pickup type " + currentTrip.pickupType + "  drop off type " + currentTrip.dropOffType + " shape dist travelled");
 			//print all info about the trips which match the arrival time
 		}
-		System.out.println("To string method done");
 	}
 
 	public static void main(String[] args) throws IOException {
@@ -129,10 +125,13 @@ public class ArrivalTimes {
 		Scanner input = new Scanner(System.in);
 		String userTime = input.next();
 		ArrivalTimes at = new ArrivalTimes("\stop_times.txt");
+		//arrayListStopTimesToString(stopTimesArray);
+		
+		
 		ArrayList <StopTimes> arrayListSorted = new ArrayList <StopTimes>();
-		arrayListSorted = at.findingMatchingArrivalTimes(userTime);
-		arrayListSortedByStopID(arrayListSorted);
-		arrayListStopTimesToString(arrayListSorted);
+		//arrayListSorted = ArrivalTimes.findingMatchingArrivalTimes(userTime);
+		//arrayListSortedByStopID(arrayListSorted);
+		//arrayListStopTimesToString(arrayListSorted);
 		
 		
 		//terminating after 10 seconds

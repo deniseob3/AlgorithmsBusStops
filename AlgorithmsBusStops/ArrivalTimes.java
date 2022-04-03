@@ -125,13 +125,15 @@ public class ArrivalTimes {
 		Scanner input = new Scanner(System.in);
 		String userTime = input.next();
 		ArrivalTimes at = new ArrivalTimes("\stop_times.txt");
-		//arrayListStopTimesToString(stopTimesArray);
+		arrayListSortedByStopID(stopTimesArray);
+		arrayListStopTimesToString(stopTimesArray);
 		
 		
-		ArrayList <StopTimes> arrayListSorted = new ArrayList <StopTimes>();
-		//arrayListSorted = ArrivalTimes.findingMatchingArrivalTimes(userTime);
-		//arrayListSortedByStopID(arrayListSorted);
-		//arrayListStopTimesToString(arrayListSorted);
+		//ArrayList <StopTimes> arrayListSorted = new ArrayList <StopTimes>();
+		stopTimesArray = ArrivalTimes.findingMatchingArrivalTimes(userTime);
+		//finding matching arrival times isn't working
+		//arrayListSortedByStopID(stopTimesArray);
+		arrayListStopTimesToString(stopTimesArray);
 		
 		
 		//terminating after 10 seconds

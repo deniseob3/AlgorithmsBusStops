@@ -8,7 +8,7 @@ import java.util.Scanner;
 public class ArrivalTimes {
 	
 	static ArrayList<StopTimes> stopTimesArray = new ArrayList<StopTimes>();
-	static ArrayList<StopTimes> tripsThatMatchArrivalTime = new ArrayList<StopTimes>();
+	 static ArrayList<StopTimes> tripsThatMatchArrivalTime = new ArrayList<StopTimes>();
 	//each element of the arraylist stores an object of type stops
 	
 	ArrivalTimes(String filenameStopTimes) throws IOException
@@ -64,37 +64,23 @@ public class ArrivalTimes {
 		return valid;
 	}
 	
-	public static ArrayList <StopTimes> findingMatchingArrivalTimes(String userInputOfTime)
+	public static ArrayList <StopTimes> findingMatching(String userInput)
 	{
-		//check user input is valid
-		if (validateUserInput(userInputOfTime) == true) {
-		StopTimes currentStopTimes;
-		int currentTripID;
-		for (int i = 0; i < stopTimesArray.size(); i ++)
+		if (validateUserInput(userInput) == true)
 		{
-			currentStopTimes = stopTimesArray.get(i);
-			if (currentStopTimes.arrivalTime.equals(userInputOfTime))
-				//two equal strings could cause problems possibly .equals?
+			for (int i = 0; i < stopTimesArray.size(); i++)
 			{
-				//add to new matching arrival time to the arraylist
-				currentTripID = currentStopTimes.tripID;
-				//find stop with that ID
-				for (int j = 0; j < stopTimesArray.size(); j++)
+				StopTimes currentStop = stopTimesArray.get(i);
+				if (userInput.equals(currentStop.arrivalTime))
+					//two equal strings
 				{
-					if (currentTripID == stopTimesArray.get(j).stopID)
-					{
-						//loop through stop times array to find all the ID's that match
-						tripsThatMatchArrivalTime.add(stopTimesArray.get(j));
-						//add the trip to the arraylist of all trips that arrive at that given time
-					}
+					tripsThatMatchArrivalTime.add(currentStop);
 				}
 			}
 		}
+		
 		return tripsThatMatchArrivalTime;
-		}
-		else {
-			return null;//return null if user inputs an invalid time
-		}
+		
 	}
 	public static void arrayListSortedByStopID(ArrayList <StopTimes> tripsThatMatchArrivalTime)
 	{
@@ -125,22 +111,14 @@ public class ArrivalTimes {
 		Scanner input = new Scanner(System.in);
 		String userTime = input.next();
 		ArrivalTimes at = new ArrivalTimes("\stop_times.txt");
-		arrayListSortedByStopID(stopTimesArray);
-		arrayListStopTimesToString(stopTimesArray);
+		tripsThatMatchArrivalTime = findingMatching(userTime);
+		arrayListSortedByStopID(tripsThatMatchArrivalTime);
+		arrayListStopTimesToString(tripsThatMatchArrivalTime);
 		
 		
-		//ArrayList <StopTimes> arrayListSorted = new ArrayList <StopTimes>();
-		stopTimesArray = ArrivalTimes.findingMatchingArrivalTimes(userTime);
+		
 		//finding matching arrival times isn't working
-		//arrayListSortedByStopID(stopTimesArray);
-		arrayListStopTimesToString(stopTimesArray);
 		
-		
-		//terminating after 10 seconds
-		//file opening but not doing anything
-		//trying to commit again
-		
-
 	}
 
 }

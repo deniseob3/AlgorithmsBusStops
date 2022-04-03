@@ -24,6 +24,7 @@ public class Stops /*implements Comparable<Stops> */{
 		this.url = url;
 		this.locationType = locationType;
 		this.parentStation = parentStation;
+		
 	}
 
 

@@ -6,15 +6,19 @@ public class ShortestPath {
 	ArrayList <Stops> stopsArray = new ArrayList<Stops>();
 	ArrayList<StopTimes> stopTimesArray = new ArrayList<StopTimes>();
 	ArrayList<Transfers> transfersArray = new ArrayList <Transfers>();
-	double [][] distanceTo = new double [stopsArray.size()][stopsArray.size()];
+	//double [][] distanceTo = new double [stopsArray.size()][stopsArray.size()];
 	//number of stops = vertices
-	double [][] edgeTo = new double [stopsArray.size()][stopsArray.size()];
+	//double [][] edgeTo = new double [stopsArray.size()][stopsArray.size()];
 	ArrayList <Stops> route = new ArrayList<Stops>();
+	//boolean [][] directedEdge = new boolean [stopsArray.size()][stopsArray.size()];
+	//there either is or isn't a directed edge between 2 points
+
 
 
 	ShortestPath(String stopFilename, String stopTimesFilename, String transfersFilename)
 	{
 		//read in all 3 files and add to relevant arraylists
+		//stops
 		if (stopFilename !=null && stopFilename != "")
 		{
 			try {
@@ -34,7 +38,7 @@ public class ShortestPath {
 					else
 					{
 						//create a stop object with each line of the file
-						
+
 						Stops currentStop = new Stops(Integer.parseInt(line[0]), Integer.parseInt(line[1]), line[2], line[3], Double.parseDouble(line[4]), Double.parseDouble(line[5]), Integer.parseInt(line[6]), line[7], Integer.parseInt(line[8]), Integer.parseInt(line[9]));
 						stopsArray.add(currentStop);
 
@@ -86,14 +90,14 @@ public class ShortestPath {
 			}
 		}
 
-
+		//transfers
 		if ((transfersFilename != null)&& (transfersFilename !=""))
 			try {
 				File file3 = new File(transfersFilename);
 				Scanner scanner3 = new Scanner(file3);
 				int i = 0;
 				//Transfers currentTransfer;
-				
+
 				while(scanner3.hasNextLine())
 				{
 					String [] line = scanner3.nextLine().trim().split(",");
@@ -106,59 +110,23 @@ public class ShortestPath {
 						//if times are valid??
 						Transfers currentTransfer = new Transfers(Integer.parseInt(line[0]), Integer.parseInt(line[1]), Integer.parseInt(line[2]), Integer.parseInt(line[3]));
 						transfersArray.add(currentTransfer);
+						//directedEdge[Integer.parseInt(line[0])][Integer.parseInt(line[1])] = true;
+						//directed edge from to is true
 					}
 				}
 
 			}
-			catch(Exception e)
-			{
-				System.out.print("Invalid transfers file name");
-			}
-
-	}
-	
-	
-	
-	public void shortestPath(int v)
-	{
-		//v = origin
-		boolean [] sptSet = new boolean[distanceTo.length];
-		sptSet[v] = true;
-		while(true)
+		catch(Exception e)
 		{
-			int x = -1;
-			for(int i = 0; i < distanceTo.length; i ++) 
-			{
-				//Break when new vertice is found
-				if((sptSet[i] == false) && (distanceTo[v][i] != Integer.MAX_VALUE))
-				{
-					x = i;
-					break; 
-				}
-			}
-
-			if(x == -1)
-			{
-				return;
-			}
-
-			sptSet[x] = true;
-
-			for(int i = 0; i < distanceTo.length; i++)
-			{
-				if(distanceTo[v][x] + distanceTo[x][i] < distanceTo[v][i])
-				{
-					distanceTo[v][i] = distanceTo[v][x] + distanceTo[x][i];
-					sptSet[i] = false;
-					edgeTo[v][i] = x;
-					//directedEdge[v][i]
-					//wrong
-				}
-			}
-
+			System.out.print("Invalid transfers file name");
 		}
-	
+
 	}
+
+
+
+
+
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub

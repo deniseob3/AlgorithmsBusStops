@@ -116,7 +116,7 @@ public class ArrivalTimes {
 		arrayListStopTimesToString(tripsThatMatchArrivalTime);
 		
 		
-		
+		//test with 20:00:00
 		//finding matching arrival times isn't working
 		
 	}

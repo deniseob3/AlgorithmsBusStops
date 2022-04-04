@@ -34,7 +34,8 @@ public class BusStopByName {
 						// add to the end of the arraylist
 						Stops currentStop = new Stops(Integer.parseInt(line[0]), Integer.parseInt(line[1]), line[2], line[3], Double.parseDouble(line[4]), Double.parseDouble(line[5]), Integer.parseInt(line[6]), line[7], Integer.parseInt(line[8]), Integer.parseInt(line[9]));
 						stopsArray.add(currentStop);
-						//movingPrefixes(currentStop);
+						movingPrefixes(currentStop);
+						//the moving prefixes method adds the current stop to the tst
 
 					}
 					i++;
@@ -72,7 +73,10 @@ public class BusStopByName {
 					//add the prefix to the end
 					newName+=line[0];
 					currentStop.name = newName;
-					tst.put(currentStop.name, stopsArray);
+					tst.putt(currentStop.name, currentStop);
+					//changed the put method, not sure if it works
+					//key = stop name changed
+					//value = all details of the stop
 				}
 		}
 		
@@ -88,14 +92,6 @@ public class BusStopByName {
 		//??????
 		return null;
 	
-	}
-	public static void creatingTST(ArrayList<String> stopsArray)
-	{
-		for (int i = 0; i < stopsArray.size(); i++)
-		{
-			//tst.put(stopsArray.get(i), stopsArray.get(i).);
-			//key = value
-		}
 	}
 
 

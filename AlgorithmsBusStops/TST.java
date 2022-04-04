@@ -143,7 +143,7 @@ public class TST<Value> {
         root = put(root, key, val, 0);
     }
     
-    public void put (String key, Stops currentStop)
+    public void putt (String key, Stops currentStop)
     {
     	if (key == null) {
             throw new IllegalArgumentException("calls put() with null key");
@@ -167,7 +167,7 @@ public class TST<Value> {
 		
 	}
 
-	private Node<Value> put(Node<Value> x, String key, Value val, int d) {
+	public Node<Value> put(Node<Value> x, String key, Value val, int d) {
         char c = key.charAt(d);
         if (x == null) {
             x = new Node<Value>();

@@ -84,22 +84,38 @@ public class BusStopByName {
 
 	}
 	
-	public static ArrayList<String> checkingMatches(String userInput)
+	public static ArrayList<Stops> checkingMatches(String userInput)
 	{
-		//USE TST
-		//validate user input??
-		stopsThatMatchArray.add((Stops) tst.keysWithPrefix(userInput));
-		//??????
-		return null;
+		
+		Iterable<String> queue = new Queue<String>();
+		queue = tst.keysThatMatch(userInput);
+		ArrayList <Stops> matchingStops = new ArrayList <Stops> ();
+		Stops currentStop;
+		for (String key: queue)
+		{
+			currentStop = tst.get(key);
+			//returns value associated with that key
+			matchingStops.add(currentStop);
+		}
+		
+		return matchingStops;
 	
 	}
 
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		System.out.print("Enter the stop name");
+		System.out.print("Enter the stop name: ");
 		Scanner input = new Scanner(System.in);
 		String userInput = input.next();
+		
+		ArrayList <Stops> matchingStops = new ArrayList <Stops> ();
+		matchingStops = checkingMatches(userInput);
+		for (Stops currentStop: matchingStops)
+		{
+			System.out.println(currentStop);
+			//
+		}
 		
 
 	}

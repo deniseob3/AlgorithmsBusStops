@@ -3,9 +3,9 @@ public class Transfers {
 	public int fromStopID;
 	public int toStopID;
 	public int transferType;
-	public int transferTime;
+	public String transferTime;
 	
-	Transfers(int fromStopID, int toStopID, int transferType, int transferTime)
+	Transfers(int fromStopID, int toStopID, int transferType, String transferTime)
 	{
 		this.fromStopID = fromStopID;
 		this.toStopID = toStopID;

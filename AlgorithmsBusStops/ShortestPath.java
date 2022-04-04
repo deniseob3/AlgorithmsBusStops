@@ -8,6 +8,7 @@ public class ShortestPath {
 	static ArrayList<Transfers> transfersArray = new ArrayList <Transfers>();
 	static ArrayList <Stops> route = new ArrayList<Stops>();
 	static ArrayList <DirectedEdge> directedEdgesArray = new ArrayList<DirectedEdge>();
+	///directed edges arraylist is in no particular order
 	static double [][] distanceTo = new double[stopsArray.size()][stopsArray.size()];
 
 
@@ -83,12 +84,12 @@ public class ShortestPath {
 				for (int k = 1; k <= stopTimesArray.size(); k ++)
 				{
 					if (stopTimesArray.get(k-1).tripID == (stopTimesArray.get(k).tripID))
-						//if two consecutive trips have the same ID
+						//if two consecutive trips have the same ID, create a directed edge between them
 					{
 						DirectedEdge currentEdge = new DirectedEdge(stopTimesArray.get(k-1).stopID, stopTimesArray.get(k).stopID, 1);
 						//cost is 1 from stop times file
 						directedEdgesArray.add(currentEdge);
-						
+
 					}
 				}
 
@@ -117,26 +118,28 @@ public class ShortestPath {
 					}
 					else 
 					{
-						//if times are valid??
-						Transfers currentTransfer = new Transfers(Integer.parseInt(line[0]), Integer.parseInt(line[1]), Integer.parseInt(line[2]), Integer.parseInt(line[3]));
-						transfersArray.add(currentTransfer);
-						//directedEdge[Integer.parseInt(line[0])][Integer.parseInt(line[1])] = true;
-						//directed edge from to is true
-						int transferType = Integer.parseInt(line[2]);
-						if (transferType == 0)
-						{
-							cost = 2;
+						if(ArrivalTimes.validateUserInput(line[3]) == true) {
+							//if the time is valid then create a transfer object
+							Transfers currentTransfer = new Transfers(Integer.parseInt(line[0]), Integer.parseInt(line[1]), Integer.parseInt(line[2]), line[3]);
+							transfersArray.add(currentTransfer);
+							
+							int transferType = Integer.parseInt(line[2]);
+							if (transferType == 0)
+							{
+								cost = 2;
+							}
+							if (transferType == 2)
+							{
+								cost = (Integer.parseInt(line[3]))/100;
+								//cost = minimum transfer time /100
+							}
+							DirectedEdge currentEdge = new DirectedEdge(Integer.parseInt(line[0]), Integer.parseInt(line[0]), cost);
+							//creates directed edge between the two edges
+							directedEdgesArray.add(currentEdge);
 						}
-						if (transferType == 2)
-						{
-							cost = (Integer.parseInt(line[3]))/100;
-							//cost = minimum transfer time /100
-						}
-						DirectedEdge currentEdge = new DirectedEdge(Integer.parseInt(line[0]), Integer.parseInt(line[0]), cost);
-						//creates directed edge between the two edges
-						directedEdgesArray.add(currentEdge);
 					}
 				}
+				scanner3.close();
 
 			}
 		catch(Exception e)
@@ -145,12 +148,14 @@ public class ShortestPath {
 		}
 
 	}
-	
+
 	public static void making2DArray()
 	{
 		//two for loops
 		Stops currentOrigin;
 		Stops currentDestination;
+		//what are i and j? how do they correspond to the individual stops
+		//maybe sort each array?
 		for (int i = 0; i < stopsArray.size(); i++)
 		{
 			for (int j = 0; j < stopsArray.size(); j++)
@@ -172,11 +177,27 @@ public class ShortestPath {
 			}
 		}
 	}
-	
+
 	public static void shortestPath(int fromStopID, int toStopId)
 	{
 		int k = fromStopID;
+		Stops currentStop;
+		Stops originStop;
+		for (int i = 0; i < stopsArray.size(); i++)
+		{
+			currentStop = stopsArray.get(i);
+			if (currentStop.id == fromStopID)
+			{
+				originStop = currentStop;
+				route.add(originStop);
+				break;
+				//exit for loop
+				
+			}
+			//returning that no such stop exists
+		}
 		boolean[] shortestPath = new boolean[distanceTo.length];
+		//route.add(fromStopID);
 		shortestPath[k] = true;
 		while (true) {
 			int x = -1;
@@ -214,19 +235,15 @@ public class ShortestPath {
 		ShortestPath st = new ShortestPath("stops", "stop_times", "transfers");
 		making2DArray();
 		//create the 2d array
-		
+
 		System.out.println("Enter the origin stop");
 		Scanner input = new Scanner(System.in);
 		int originStop = input.nextInt();
 		System.out.println("Enter the destination stop");
 		int destination = input.nextInt();
-		
+
 		shortestPath(originStop, destination);
 
-		for (int i =0; i < distanceTo.length; i++)
-		{
-			
-		}
 	}
 
 }

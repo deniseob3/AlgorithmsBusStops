@@ -67,7 +67,7 @@ public class TST<Value> {
     private static class Node<Value> {
         private char c;                        // character
         private Node<Value> left, mid, right;  // left, middle, and right subtries
-        private Value val;                     // value associated with string
+        private Stops val;                     // value associated with string
     }
 
     /**
@@ -105,7 +105,7 @@ public class TST<Value> {
      *     and {@code null} if the key is not in the symbol table
      * @throws IllegalArgumentException if {@code key} is {@code null}
      */
-    public Value get(String key) {
+    public Stops get(String key) {
         if (key == null) {
             throw new IllegalArgumentException("calls get() with null argument");
         }
@@ -142,8 +142,32 @@ public class TST<Value> {
         else if(val == null) n--;       // delete existing key
         root = put(root, key, val, 0);
     }
+    
+    public void put (String key, Stops currentStop)
+    {
+    	if (key == null) {
+            throw new IllegalArgumentException("calls put() with null key");
+        }
+        if (!contains(key)) n++;
+        else if(currentStop == null) n--;       // delete existing key
+        root = put(root, key, currentStop, 0);
+    }
 
-    private Node<Value> put(Node<Value> x, String key, Value val, int d) {
+    public TST.Node<Value> put(TST.Node<Value> x, String key, Stops currentStop, int d) {
+    	 char c = key.charAt(d);
+         if (x == null) {
+             x = new Node<Value>();
+             x.c = c;
+         }
+         if      (c < x.c)               x.left  = put(x.left,  key, currentStop, d);
+         else if (c > x.c)               x.right = put(x.right, key, currentStop, d);
+         else if (d < key.length() - 1)  x.mid   = put(x.mid,   key, currentStop, d+1);
+         else                            x.val   = currentStop;
+         return x;
+		
+	}
+
+	private Node<Value> put(Node<Value> x, String key, Value val, int d) {
         char c = key.charAt(d);
         if (x == null) {
             x = new Node<Value>();
@@ -152,7 +176,7 @@ public class TST<Value> {
         if      (c < x.c)               x.left  = put(x.left,  key, val, d);
         else if (c > x.c)               x.right = put(x.right, key, val, d);
         else if (d < key.length() - 1)  x.mid   = put(x.mid,   key, val, d+1);
-        else                            x.val   = val;
+        else                            x.val   = (Stops) val;
         return x;
     }
 

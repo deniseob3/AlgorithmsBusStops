@@ -1,12 +1,15 @@
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 
 public class ShortestPath {
 	static ArrayList <Stops> stopsArray = new ArrayList<Stops>();
 	static ArrayList<StopTimes> stopTimesArray = new ArrayList<StopTimes>();
 	static ArrayList<Transfers> transfersArray = new ArrayList <Transfers>();
-	static ArrayList <Stops> route = new ArrayList<Stops>();
+	static //static ArrayList <Stops> route = new ArrayList<Stops>();
+	HashMap<Integer, Stops> route = new HashMap<>();
+	//integer = stopID
 	static ArrayList <DirectedEdge> directedEdgesArray = new ArrayList<DirectedEdge>();
 	///directed edges arraylist is in no particular order
 	static double [][] distanceTo = new double[stopsArray.size()][stopsArray.size()];
@@ -148,6 +151,31 @@ public class ShortestPath {
 		}
 
 	}
+	
+	public static void ArrayOfDirectedEdges2D()
+	{
+		double[][] distTo = new double [directedEdgesArray.size()][directedEdgesArray.size()];
+		for (int i = 0; i < directedEdgesArray.size(); i++)
+		{
+			for (int j = 0; j < directedEdgesArray.size(); j++)
+			{
+				if(i == j)
+				{
+					distTo[i][j] = 0;
+					//from to the same stop
+				}
+				else if(i == 2) // if directed edge exists between two nodes
+				{
+					distTo[i][j] = 100; //cost
+				}
+				else
+				{
+					distTo[i][j] = Integer.MAX_VALUE;
+				}
+			}
+		}
+	}
+	
 
 	public static void making2DArray()
 	{
@@ -177,6 +205,13 @@ public class ShortestPath {
 			}
 		}
 	}
+	public static void dijkstra(int fromStopID, int toStopId)
+	{
+		HashMap<Integer, String> route = new HashMap<>();
+		//key value pairs
+		
+		
+	}
 
 	public static void shortestPath(int fromStopID, int toStopId)
 	{
@@ -189,7 +224,7 @@ public class ShortestPath {
 			if (currentStop.id == fromStopID)
 			{
 				originStop = currentStop;
-				route.add(originStop);
+				route.put(currentStop.id, originStop);
 				break;
 				//exit for loop
 				
@@ -213,11 +248,13 @@ public class ShortestPath {
 				return;
 			}
 			shortestPath[x] = true;
+			
 
 			for (int i = 0; i < distanceTo.length; i++) {
 				if (distanceTo[k][x] + distanceTo[x][i] < distanceTo[k][i]) {
 					distanceTo[k][i] = distanceTo[k][x] + distanceTo[x][i];
 					shortestPath[i] = false;
+					//route.add(node k , node i)
 					//edgeTo[k][i] = x;
 				}
 			}

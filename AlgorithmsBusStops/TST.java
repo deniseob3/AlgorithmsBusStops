@@ -1,7 +1,7 @@
 
 
 /******************************************************************************
- *  Compilation:  javac TST.java
+ *  Compilation:  java TST.java
  *  Execution:    java TST < words.txt
  *  Dependencies: StdIn.java
  *  Data files:   https://algs4.cs.princeton.edu/52trie/shellsST.txt

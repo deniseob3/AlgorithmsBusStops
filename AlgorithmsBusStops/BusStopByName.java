@@ -8,6 +8,7 @@ public class BusStopByName {
 	static ArrayList<String> stopNamesArray = new ArrayList<String>();
 	static ArrayList<Stops> stopsThatMatchArray = new ArrayList <Stops>();
 	static TST<Stops> tst = new TST<Stops>();
+	//value of tst = stops
 
 	//read in stops file
 	BusStopByName(String stopFilename) throws IOException {
@@ -83,7 +84,18 @@ public class BusStopByName {
 				//add the prefix to the end
 				newName+=line[0];
 				currentStop.name = newName;
-				tst.putt(currentStop.name, currentStop);
+				
+				if (tst.contains(currentStop.name) == true)
+				{
+					//do not add names that are not unique to the tst
+					//if the tst already contains that key
+					//not sure if that is necessary
+				}
+				else
+				{
+					tst.put(currentStop.name, currentStop);
+				}
+				//overrides the existing
 				//changed the put method, not sure if it works
 				//key = stop name changed
 				//value = all details of the stop
@@ -108,6 +120,7 @@ public class BusStopByName {
 			}
 		}
 	}
+	//are names unique???
 
 	public static void checkingMatches(String userInput)
 	{

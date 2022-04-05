@@ -142,30 +142,7 @@ public class TST<Value> {
         else if(val == null) n--;       // delete existing key
         root = put(root, key, val, 0);
     }
-    
-    public void putt (String key, Stops currentStop)
-    {
-    	if (key == null) {
-            throw new IllegalArgumentException("calls put() with null key");
-        }
-        if (!contains(key)) n++;
-        else if(currentStop == null) n--;       // delete existing key
-        root = put(root, key, currentStop, 0);
-    }
 
-    public TST.Node<Value> put(TST.Node<Value> x, String key, Stops currentStop, int d) {
-    	 char c = key.charAt(d);
-         if (x == null) {
-             x = new Node<Value>();
-             x.c = c;
-         }
-         if      (c < x.c)               x.left  = put(x.left,  key, currentStop, d);
-         else if (c > x.c)               x.right = put(x.right, key, currentStop, d);
-         else if (d < key.length() - 1)  x.mid   = put(x.mid,   key, currentStop, d+1);
-         else                            x.val   = currentStop;
-         return x;
-		
-	}
 
 	public Node<Value> put(Node<Value> x, String key, Value val, int d) {
         char c = key.charAt(d);

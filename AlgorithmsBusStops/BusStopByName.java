@@ -93,6 +93,7 @@ public class BusStopByName {
 				}
 				else
 				{
+					//System.out.println("Added to tree");
 					tst.put(currentStop.name, currentStop);
 				}
 				//overrides the existing
@@ -101,33 +102,40 @@ public class BusStopByName {
 				//value = all details of the stop
 			}
 		}
-		System.out.println("Moving prefixes complete");
+		//System.out.println("Moving prefixes complete");
 
 
 
 	}
-	public static void uniqueStopNamesOnly()
+
+	public static ArrayList <String> checkingMatches(String userInput)
 	{
-		//not all stop names are unique
-		for (int i = 0; i < stopsArray.size(); i ++)
+		//System.out.println("Checking matches method called");
+		Iterable<String> queueOfMatchingNames = tst.keysWithPrefix(userInput);
+		ArrayList <String> listOfMatchingNames = new ArrayList <String>();
+		for(String name: queueOfMatchingNames)
 		{
-			for (int j = 0; j < stopsArray.size(); j++)
-			{
-				if (stopsArray.get(i).name == stopsArray.get(j).name)
-				{
-					
-				}
-			}
+			listOfMatchingNames.add(name);
+			//System.out.println("Added to list of matching names");
 		}
+		return listOfMatchingNames;
 	}
-	//are names unique???
-
-	public static void checkingMatches(String userInput)
+	
+	public static void matchingNamesToStops(ArrayList <String> matchingNames)
 	{
-		//check which stop names match the userInput
-		//key = stop name, value = full stop info
-		tst.get(userInput);
-		//keys are unique??? //stop names are not
+		//System.out.println("Matching names to stop method called");
+		for (String name: matchingNames)
+		{
+			Stops currentStop = tst.get(name);
+			stopsThatMatchArray.add(currentStop);
+			//System.out.println("Added to stops that match array");
+		}
+		
+	}
+	
+	public static void stopTimesToString(Stops currentStop)
+	{
+		System.out.println("Stop id: " + currentStop.id + " Stop code: " + currentStop.code + " stop name: " + currentStop.name + " stop description " + currentStop.description+ " latitude: "+ currentStop.latitude + " longitude " + currentStop.longitude + " zone id " + currentStop.zoneID);
 	}
 
 	public static void main(String[] args) throws IOException {
@@ -137,9 +145,17 @@ public class BusStopByName {
 		String userInput = input.next();
 		
 
-		ArrayList <Stops> matching = new ArrayList <Stops> ();
+		ArrayList <String> matchingNames = new ArrayList <String> ();
 		BusStopByName bus = new BusStopByName("./stops.txt");
 		//this sets up the tst and moves the prefixes
+		matchingNames = checkingMatches(userInput);
+		//return values associated with the matchingNamesKeys
+		matchingNamesToStops(matchingNames);
+		
+		for (Stops currentStop: stopsThatMatchArray)
+		{
+			stopTimesToString(currentStop);
+		}
 		
 		//checking matches
 		

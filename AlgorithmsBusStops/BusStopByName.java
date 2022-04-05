@@ -43,7 +43,6 @@ public class BusStopByName {
 						Stops currentStop = new Stops(Integer.parseInt(line[0]), line[1], line[2], line[3], Double.parseDouble(line[4]), Double.parseDouble(line[5]), line[6] );
 						stopsArray.add(currentStop);
 						//Some have no stop code
-						//System.out.println(currentStop.id);
 						movingPrefixes(currentStop);
 						//the moving prefixes method adds the current stop to the tst
 
@@ -95,30 +94,31 @@ public class BusStopByName {
 
 
 	}
-
-	public static Stops checkingMatches(String userInput)
+	public static void uniqueStopNamesOnly()
 	{
-
-		//Iterable<String> queueNames = new Queue<String>();
-		//queueNames = tst.keysThatMatch(userInput);
-		//ArrayList <Stops> matchingStops = new ArrayList <Stops> ();
-		//for (int i =0; i < stopsArray.size(); i++)
-		//{
-			 //queueNames.get(i);
-		//}
-		//using the tst to find keys that match the key we have provided
-		//System.out.print("Matching stops complete");
-		Stops matches = tst.get(userInput);
-		//needs to return all the stops that match, not just 1
-		System.out.print("Matching stops complete");
-		return matches;
-		//problem is matching the stop name to the list of stops
+		//not all stop names are unique
+		for (int i = 0; i < stopsArray.size(); i ++)
+		{
+			for (int j = 0; j < stopsArray.size(); j++)
+			{
+				if (stopsArray.get(i).name == stopsArray.get(j).name)
+				{
+					
+				}
+			}
+		}
 	}
 
+	public static void checkingMatches(String userInput)
+	{
+		//check which stop names match the userInput
+		//key = stop name, value = full stop info
+		tst.get(userInput);
+		//keys are unique??? //stop names are not
+	}
 
 	public static void main(String[] args) throws IOException {
-		// TODO Auto-generated method stub
-		//BusStopByName bus = new BusStopByName("string");
+	
 		System.out.println("Enter the stop name: ");
 		Scanner input = new Scanner(System.in);
 		String userInput = input.next();
@@ -126,8 +126,11 @@ public class BusStopByName {
 
 		ArrayList <Stops> matching = new ArrayList <Stops> ();
 		BusStopByName bus = new BusStopByName("./stops.txt");
-		Stops matchingStops = checkingMatches(userInput);
-		String currentStop;
+		//this sets up the tst and moves the prefixes
+		
+		//checking matches
+		
+		
 		
 		
 

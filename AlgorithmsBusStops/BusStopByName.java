@@ -96,7 +96,7 @@ public class BusStopByName {
 
 	}
 
-	public static String checkingMatches(String userInput)
+	public static Stops checkingMatches(String userInput)
 	{
 
 		//Iterable<String> queueNames = new Queue<String>();
@@ -108,7 +108,8 @@ public class BusStopByName {
 		//}
 		//using the tst to find keys that match the key we have provided
 		//System.out.print("Matching stops complete");
-		String matches = tst.get(userInput).toString();
+		Stops matches = tst.get(userInput);
+		//needs to return all the stops that match, not just 1
 		System.out.print("Matching stops complete");
 		return matches;
 		//problem is matching the stop name to the list of stops
@@ -123,14 +124,11 @@ public class BusStopByName {
 		String userInput = input.next();
 		
 
-		ArrayList <Stops> matchingStops = new ArrayList <Stops> ();
+		ArrayList <Stops> matching = new ArrayList <Stops> ();
 		BusStopByName bus = new BusStopByName("./stops.txt");
-		String matchingNames = checkingMatches(userInput);
+		Stops matchingStops = checkingMatches(userInput);
 		String currentStop;
-		for (int i = 0; i < matchingStops.size(); i++)
-		{
-			
-		}
+		
 		
 
 

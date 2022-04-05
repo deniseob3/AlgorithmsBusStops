@@ -79,7 +79,7 @@ public class BusStopByName {
 				String newName = "";
 				for (int j = 1; j < line.length; j ++)
 				{
-					newName += line[j];
+					newName += line[j] + " ";
 				}
 				//add the prefix to the end
 				newName+=line[0];

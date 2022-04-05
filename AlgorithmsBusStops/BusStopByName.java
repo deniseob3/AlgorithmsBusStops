@@ -42,7 +42,7 @@ public class BusStopByName {
 
 						Stops currentStop = new Stops(Integer.parseInt(line[0]), line[1], line[2], line[3], Double.parseDouble(line[4]), Double.parseDouble(line[5]), line[6] );
 						stopsArray.add(currentStop);
-						//Some have no code
+						//Some have no stop code
 						//System.out.println(currentStop.id);
 						movingPrefixes(currentStop);
 						//the moving prefixes method adds the current stop to the tst
@@ -96,22 +96,22 @@ public class BusStopByName {
 
 	}
 
-	public static ArrayList<Stops> checkingMatches(String userInput)
+	public static String checkingMatches(String userInput)
 	{
 
-		Iterable<String> queue = new Queue<String>();
-		queue = tst.keysThatMatch(userInput);
-		ArrayList <Stops> matchingStops = new ArrayList <Stops> ();
-		Stops currentStop;
-		for (String key: queue)
-		{
-			currentStop = tst.get(key);
-			//returns value associated with that key
-			matchingStops.add(currentStop);
-		}
+		//Iterable<String> queueNames = new Queue<String>();
+		//queueNames = tst.keysThatMatch(userInput);
+		//ArrayList <Stops> matchingStops = new ArrayList <Stops> ();
+		//for (int i =0; i < stopsArray.size(); i++)
+		//{
+			 //queueNames.get(i);
+		//}
+		//using the tst to find keys that match the key we have provided
+		//System.out.print("Matching stops complete");
+		String matches = tst.get(userInput).toString();
 		System.out.print("Matching stops complete");
-		return matchingStops;
-
+		return matches;
+		//problem is matching the stop name to the list of stops
 	}
 
 
@@ -121,17 +121,17 @@ public class BusStopByName {
 		System.out.println("Enter the stop name: ");
 		Scanner input = new Scanner(System.in);
 		String userInput = input.next();
-		//FILE IS READING IN WRONG
-		//POSSIBLY CANNOT FIND THE FILE
+		
 
 		ArrayList <Stops> matchingStops = new ArrayList <Stops> ();
 		BusStopByName bus = new BusStopByName("./stops.txt");
-		matchingStops = checkingMatches(userInput);
+		String matchingNames = checkingMatches(userInput);
 		String currentStop;
 		for (int i = 0; i < matchingStops.size(); i++)
 		{
-			//c
+			
 		}
+		
 
 
 	}

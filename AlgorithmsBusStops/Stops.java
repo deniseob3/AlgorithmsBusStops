@@ -1,18 +1,18 @@
 
 public class Stops /*implements Comparable<Stops> */{
 	public static int id;
-	public int code;
+	public String code;
 	public String name;
 	public String description;
 	public double latitude;
 	public double longitude;
 	public String zoneID;
-	public String url; //type of url??
-	public String locationType;
-	public String parentStation;
+	//public String url; //type of url??
+	//public String locationType;
+	//public String parentStation;
 	//Not all stops have a parent station
 
-	Stops(int id, int code, String name, String description, double latitude, double longitude, String zoneID, String url, String locationType, String parentStation)
+	Stops(int id, String code, String name, String description, double latitude, double longitude, String zoneID)
 	{
 		//creating a stop
 		this.id = id;
@@ -22,9 +22,9 @@ public class Stops /*implements Comparable<Stops> */{
 		this.latitude = latitude;
 		this.longitude = longitude;
 		this.zoneID = zoneID;
-		this.url = url;
-		this.locationType = locationType;
-		this.parentStation = parentStation;
+		///this.url = url;
+		//this.locationType = locationType;
+		//this.parentStation = parentStation;
 		
 	}
 

@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 public class BusStopByName {
 	static ArrayList<Stops> stopsArray = new ArrayList<Stops>();
+	static ArrayList<String> stopNamesArray = new ArrayList<String>();
 	static ArrayList<Stops> stopsThatMatchArray = new ArrayList <Stops>();
 	static TST<Stops> tst = new TST<Stops>();
 
@@ -38,8 +39,11 @@ public class BusStopByName {
 						//store these values
 						//create a stop object with each line of the file
 						// add to the end of the arraylist
-						Stops currentStop = new Stops(Integer.parseInt(line[0]), Integer.parseInt(line[1]), line[2], line[3], Double.parseDouble(line[4]), Double.parseDouble(line[5]), line[6], line[7], line[8], line[9]);
+
+						Stops currentStop = new Stops(Integer.parseInt(line[0]), line[1], line[2], line[3], Double.parseDouble(line[4]), Double.parseDouble(line[5]), line[6] );
 						stopsArray.add(currentStop);
+						//Some have no code
+						//System.out.println(currentStop.id);
 						movingPrefixes(currentStop);
 						//the moving prefixes method adds the current stop to the tst
 
@@ -50,7 +54,7 @@ public class BusStopByName {
 			}
 			catch (Exception e)
 			{
-				//System.out.println("Invalid file name stops");
+				System.out.println("Invalid file name stops");
 				e.printStackTrace();
 			}
 		}
@@ -65,36 +69,36 @@ public class BusStopByName {
 		listOfPrefixes.add("NB");
 		listOfPrefixes.add("SB");
 		listOfPrefixes.add("EB");
-		
-			for (int a = 0; a < listOfPrefixes.size(); a++) 
+
+		for (int a = 0; a < listOfPrefixes.size(); a++) 
+		{
+			if (currentStop.name.contains(listOfPrefixes.get(a)))
 			{
-				if (currentStop.name.contains(listOfPrefixes.get(a)))
+				String [] line = currentStop.name.trim().split(" ");
+				String prefix = line[0];
+				String newName = "";
+				for (int j = 1; j < line.length; j ++)
 				{
-					String [] line = currentStop.name.trim().split(" ");
-					String prefix = line[0];
-					String newName = "";
-					for (int j = 1; j < line.length; j ++)
-					{
-						newName += line[j];
-					}
-					//add the prefix to the end
-					newName+=line[0];
-					currentStop.name = newName;
-					tst.putt(currentStop.name, currentStop);
-					//changed the put method, not sure if it works
-					//key = stop name changed
-					//value = all details of the stop
+					newName += line[j];
 				}
+				//add the prefix to the end
+				newName+=line[0];
+				currentStop.name = newName;
+				tst.putt(currentStop.name, currentStop);
+				//changed the put method, not sure if it works
+				//key = stop name changed
+				//value = all details of the stop
+			}
 		}
-			System.out.println("Moving prefixes complete");
-		
-		
+		System.out.println("Moving prefixes complete");
+
+
 
 	}
-	
+
 	public static ArrayList<Stops> checkingMatches(String userInput)
 	{
-		
+
 		Iterable<String> queue = new Queue<String>();
 		queue = tst.keysThatMatch(userInput);
 		ArrayList <Stops> matchingStops = new ArrayList <Stops> ();
@@ -107,7 +111,7 @@ public class BusStopByName {
 		}
 		System.out.print("Matching stops complete");
 		return matchingStops;
-	
+
 	}
 
 
@@ -119,16 +123,16 @@ public class BusStopByName {
 		String userInput = input.next();
 		//FILE IS READING IN WRONG
 		//POSSIBLY CANNOT FIND THE FILE
-		
+
 		ArrayList <Stops> matchingStops = new ArrayList <Stops> ();
 		BusStopByName bus = new BusStopByName("./stops.txt");
 		matchingStops = checkingMatches(userInput);
-		for (Stops currentStop: matchingStops)
+		String currentStop;
+		for (int i = 0; i < matchingStops.size(); i++)
 		{
-			System.out.println(currentStop);
-			//
+			//c
 		}
-		
+
 
 	}
 

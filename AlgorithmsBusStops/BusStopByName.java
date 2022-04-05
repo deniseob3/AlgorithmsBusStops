@@ -38,7 +38,7 @@ public class BusStopByName {
 						//store these values
 						//create a stop object with each line of the file
 						// add to the end of the arraylist
-						Stops currentStop = new Stops(Integer.parseInt(line[0]), Integer.parseInt(line[1]), line[2], line[3], Double.parseDouble(line[4]), Double.parseDouble(line[5]), line[6], line[7], Integer.parseInt(line[8]), Integer.parseInt(line[9]));
+						Stops currentStop = new Stops(Integer.parseInt(line[0]), Integer.parseInt(line[1]), line[2], line[3], Double.parseDouble(line[4]), Double.parseDouble(line[5]), line[6], line[7], line[8], line[9]);
 						stopsArray.add(currentStop);
 						movingPrefixes(currentStop);
 						//the moving prefixes method adds the current stop to the tst

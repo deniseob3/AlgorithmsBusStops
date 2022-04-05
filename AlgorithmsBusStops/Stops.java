@@ -8,10 +8,11 @@ public class Stops /*implements Comparable<Stops> */{
 	public double longitude;
 	public String zoneID;
 	public String url; //type of url??
-	public int locationType;
-	public int parentStation;
+	public String locationType;
+	public String parentStation;
+	//Not all stops have a parent station
 
-	Stops(int id, int code, String name, String description, double latitude, double longitude, String zoneID, String url, int locationType, int parentStation)
+	Stops(int id, int code, String name, String description, double latitude, double longitude, String zoneID, String url, String locationType, String parentStation)
 	{
 		//creating a stop
 		this.id = id;

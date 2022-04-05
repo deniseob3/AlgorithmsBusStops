@@ -40,7 +40,7 @@ public class ShortestPath {
 					{
 						//create a stop object with each line of the file
 
-						Stops currentStop = new Stops(Integer.parseInt(line[0]), Integer.parseInt(line[1]), line[2], line[3], Double.parseDouble(line[4]), Double.parseDouble(line[5]), Integer.parseInt(line[6]), line[7], Integer.parseInt(line[8]), Integer.parseInt(line[9]));
+						Stops currentStop = new Stops(Integer.parseInt(line[0]), Integer.parseInt(line[1]), line[2], line[3], Double.parseDouble(line[4]), Double.parseDouble(line[5]), line[6], line[7], Integer.parseInt(line[8]), Integer.parseInt(line[9]));
 						stopsArray.add(currentStop);
 
 					}

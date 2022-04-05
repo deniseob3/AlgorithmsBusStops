@@ -1,19 +1,25 @@
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class BusStopByName {
 	static ArrayList<Stops> stopsArray = new ArrayList<Stops>();
-	//ArrayList <Stops> movedPrefixesArray = new ArrayList <Stops>();
 	static ArrayList<Stops> stopsThatMatchArray = new ArrayList <Stops>();
 	static TST<Stops> tst = new TST<Stops>();
 
 	//read in stops file
-	BusStopByName(String stopFilename) {
+	BusStopByName(String stopFilename) throws IOException {
 		if (stopFilename !=null && stopFilename != "")
 		{
 			try {
-				File file = new File(stopFilename);
+				File file = new File("./stops.txt");
+				/*File f = new File("stops.txt");
+				try {
+				    System.out.println(f.getCanonicalPath());
+				} catch (IOException e) {
+				    e.printStackTrace();
+				}*/
 				Scanner scanner = new Scanner(file);
 				int i = 0;
 
@@ -32,7 +38,7 @@ public class BusStopByName {
 						//store these values
 						//create a stop object with each line of the file
 						// add to the end of the arraylist
-						Stops currentStop = new Stops(Integer.parseInt(line[0]), Integer.parseInt(line[1]), line[2], line[3], Double.parseDouble(line[4]), Double.parseDouble(line[5]), Integer.parseInt(line[6]), line[7], Integer.parseInt(line[8]), Integer.parseInt(line[9]));
+						Stops currentStop = new Stops(Integer.parseInt(line[0]), Integer.parseInt(line[1]), line[2], line[3], Double.parseDouble(line[4]), Double.parseDouble(line[5]), line[6], line[7], Integer.parseInt(line[8]), Integer.parseInt(line[9]));
 						stopsArray.add(currentStop);
 						movingPrefixes(currentStop);
 						//the moving prefixes method adds the current stop to the tst
@@ -44,7 +50,8 @@ public class BusStopByName {
 			}
 			catch (Exception e)
 			{
-				System.out.print("Invalid file name stops");
+				//System.out.println("Invalid file name stops");
+				e.printStackTrace();
 			}
 		}
 
@@ -79,6 +86,7 @@ public class BusStopByName {
 					//value = all details of the stop
 				}
 		}
+			System.out.println("Moving prefixes complete");
 		
 		
 
@@ -97,19 +105,23 @@ public class BusStopByName {
 			//returns value associated with that key
 			matchingStops.add(currentStop);
 		}
-		
+		System.out.print("Matching stops complete");
 		return matchingStops;
 	
 	}
 
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		// TODO Auto-generated method stub
-		System.out.print("Enter the stop name: ");
+		//BusStopByName bus = new BusStopByName("string");
+		System.out.println("Enter the stop name: ");
 		Scanner input = new Scanner(System.in);
 		String userInput = input.next();
+		//FILE IS READING IN WRONG
+		//POSSIBLY CANNOT FIND THE FILE
 		
 		ArrayList <Stops> matchingStops = new ArrayList <Stops> ();
+		BusStopByName bus = new BusStopByName("./stops.txt");
 		matchingStops = checkingMatches(userInput);
 		for (Stops currentStop: matchingStops)
 		{

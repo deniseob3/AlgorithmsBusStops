@@ -159,6 +159,8 @@ public class ShortestPath {
 		//create an edge weighted digraph
 		//number of vertices
 		EdgeWeightedDigraph ewd = new EdgeWeightedDigraph(stopsArray.size());
+		//number of stops = stopsArray.size();
+		//stop ID number > stopsArray.size();
 		DijkstraSP shortestPath = new DijkstraSP(ewd, fromStopID);
 
 		if(shortestPath.hasPathTo(toStopID) == true)

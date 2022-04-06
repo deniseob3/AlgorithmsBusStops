@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 public class ShortestPath {
+	//for reading in the files
 	static ArrayList <Stops> stopsArray = new ArrayList<Stops>();
 	static ArrayList<StopTimes> stopTimesArray = new ArrayList<StopTimes>();
 	static ArrayList<Transfers> transfersArray = new ArrayList <Transfers>();
@@ -11,6 +12,8 @@ public class ShortestPath {
 	static ArrayList <DirectedEdge> directedEdgesArray = new ArrayList<DirectedEdge>();
 	///directed edges arraylist is in no particular order
 	static ArrayList <Stops> stopsOnRoute = new ArrayList <Stops> ();
+	static int countOfStops;
+	//static EdgeWeightedDigraph ewd = new EdgeWeightedDigraph(countOfStops);
 
 
 
@@ -51,6 +54,9 @@ public class ShortestPath {
 				System.out.print("Invalid file name stops");
 			}
 		}
+		countOfStops = stopsArray.size();
+		//once stops array has run
+		
 		//stop times
 		if (stopTimesFilename!= null && stopTimesFilename != "")
 		{
@@ -90,6 +96,7 @@ public class ShortestPath {
 						DirectedEdge currentEdge = new DirectedEdge(stopTimesArray.get(k-1).stopID, stopTimesArray.get(k).stopID, 1);
 						//cost is 1 from stop times file
 						directedEdgesArray.add(currentEdge);
+						//ewd.addEdge(currentEdge);
 
 					}
 				}
@@ -138,6 +145,7 @@ public class ShortestPath {
 							DirectedEdge currentEdge = new DirectedEdge(Integer.parseInt(line[0]), Integer.parseInt(line[0]), cost);
 							//creates directed edge between the two edges
 							directedEdgesArray.add(currentEdge);
+							//ewd.addEdge(currentEdge);
 						}
 					}
 				}
@@ -150,15 +158,27 @@ public class ShortestPath {
 		}
 
 	}
+	public static EdgeWeightedDigraph creatingEdgeWeightedDigraph()
+	{
+		EdgeWeightedDigraph ewd = new EdgeWeightedDigraph(stopsArray.size());
+		for (DirectedEdge currentDirectedEdge: directedEdgesArray)
+		{
+			ewd.addEdge(currentDirectedEdge);
+			//add the edges once all the files are read in
+		}
+		return ewd;
+		
+	}
 
-	public static ArrayList<DirectedEdge> dijkstraDist(int fromStopID, int toStopID)
+	public static ArrayList<DirectedEdge> dijkstraDist(int fromStopID, int toStopID, EdgeWeightedDigraph ewd)
 	{
 		//validate user input
 		//valid stop Id's
 
 		//create an edge weighted digraph
-		//number of vertices
-		EdgeWeightedDigraph ewd = new EdgeWeightedDigraph(stopsArray.size());
+		//stopsArray.size() = number of vertices = number of stops
+		//EdgeWeightedDigraph ewd = new EdgeWeightedDigraph(stopsArray.size());
+		//edge weighted digraph is empty!
 		//number of stops = stopsArray.size();
 		//stop ID number > stopsArray.size();
 		DijkstraSP shortestPath = new DijkstraSP(ewd, fromStopID);
@@ -213,8 +233,11 @@ public class ShortestPath {
 		int originStop = input.nextInt();
 		System.out.println("Enter the destination stop");
 		int destination = input.nextInt();
+		
+		//EdgeWeightedDigraph ewd = new EdgeWeightedDigraph(stopsArray.size());
+		EdgeWeightedDigraph ewd = creatingEdgeWeightedDigraph();
 
-		ArrayList <DirectedEdge> directedEdgesOnRoute = dijkstraDist(originStop, destination);
+		ArrayList <DirectedEdge> directedEdgesOnRoute = dijkstraDist(originStop, destination, ewd);
 		if(directedEdgesOnRoute == null)
 		{
 			System.out.println("No route exists!");

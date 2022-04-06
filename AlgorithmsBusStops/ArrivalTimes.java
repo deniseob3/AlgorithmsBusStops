@@ -115,10 +115,8 @@ public class ArrivalTimes {
 		tripsThatMatchArrivalTime = findingMatching(userTime);
 		arrayListSortedByStopID(tripsThatMatchArrivalTime);
 		arrayListStopTimesToString(tripsThatMatchArrivalTime);
-		
-		
+				
 		//test with 20:00:00
 		
 	}
-
 }

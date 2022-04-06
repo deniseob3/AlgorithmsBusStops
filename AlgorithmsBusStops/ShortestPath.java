@@ -209,13 +209,14 @@ public class ShortestPath {
 		System.out.println("Enter the destination stop");
 		int destination = input.nextInt();
 		boolean validRoute = true;
-		while(validRoute = true) {
-			ArrayList <DirectedEdge> directedEdgesOnRoute = dijkstraDist(originStop, destination);
-			if(directedEdgesOnRoute == null)
-			{
-				System.out.println("No route exists!");
-				validRoute = false;
-			}
+
+		ArrayList <DirectedEdge> directedEdgesOnRoute = dijkstraDist(originStop, destination);
+		if(directedEdgesOnRoute == null)
+		{
+			System.out.println("No route exists!");
+			validRoute = false;
+		}
+		else {
 			gettingStops(directedEdgesOnRoute);
 
 			for (Stops currentStop: stopsOnRoute)
@@ -223,6 +224,7 @@ public class ShortestPath {
 				System.out.println(currentStop.toString());
 			}
 		}
+
 
 
 	}

@@ -7,12 +7,10 @@ public class ShortestPath {
 	static ArrayList <Stops> stopsArray = new ArrayList<Stops>();
 	static ArrayList<StopTimes> stopTimesArray = new ArrayList<StopTimes>();
 	static ArrayList<Transfers> transfersArray = new ArrayList <Transfers>();
-	static //static ArrayList <Stops> route = new ArrayList<Stops>();
-	HashMap<Integer, Stops> route = new HashMap<>();
-	//integer = stopID
+	
 	static ArrayList <DirectedEdge> directedEdgesArray = new ArrayList<DirectedEdge>();
 	///directed edges arraylist is in no particular order
-	static double [][] distanceTo = new double[stopsArray.size()][stopsArray.size()];
+	static ArrayList <Stops> stopsOnRoute = new ArrayList <Stops> ();
 
 
 
@@ -152,124 +150,55 @@ public class ShortestPath {
 
 	}
 	
-	public static void ArrayOfDirectedEdges2D()
+	public static ArrayList<DirectedEdge> dijkstraDist(int fromStopID, int toStopID)
 	{
-		double[][] distTo = new double [directedEdgesArray.size()][directedEdgesArray.size()];
-		for (int i = 0; i < directedEdgesArray.size(); i++)
+		//validate user input
+		//valid stop Id's
+		
+		//create an edge weighted digraph
+		EdgeWeightedDigraph ewd = new EdgeWeightedDigraph(fromStopID);
+		DijkstraSP shortestPath = new DijkstraSP(ewd, fromStopID);
+		
+		if(shortestPath.hasPathTo(toStopID) == true)
 		{
-			for (int j = 0; j < directedEdgesArray.size(); j++)
+			Iterable <DirectedEdge> shortestPathIterable = shortestPath.pathTo(toStopID);
+			ArrayList <DirectedEdge> stopIDsOnRoute = new ArrayList <DirectedEdge>();
+			
+			for(DirectedEdge edge: shortestPathIterable)
 			{
-				if(i == j)
+				stopIDsOnRoute.add(edge);
+			}
+			return stopIDsOnRoute;
+		}
+		else
+		{
+			return null;
+		}
+				
+		
+	}
+	
+	public static void gettingStops(ArrayList <DirectedEdge> directedEdgesOnRoute)
+	{
+		for (DirectedEdge edge: directedEdgesOnRoute)
+		{
+			Stops currentStop;
+			int currentStopID = edge.from();
+			for (int i = 0; i < stopsArray.size(); i++)
+			{
+				if (currentStopID == stopsArray.get(i).id)
 				{
-					distTo[i][j] = 0;
-					//from to the same stop
-				}
-				else if(i == 2) // if directed edge exists between two nodes
-				{
-					distTo[i][j] = 100; //cost
-				}
-				else
-				{
-					distTo[i][j] = Integer.MAX_VALUE;
+					currentStop = stopsArray.get(i);
+					stopsOnRoute.add(currentStop);
 				}
 			}
 		}
 	}
 	
 
-	public static void making2DArray()
-	{
-		//two for loops
-		Stops currentOrigin;
-		Stops currentDestination;
-		//what are i and j? how do they correspond to the individual stops
-		//maybe sort each array?
-		for (int i = 0; i < stopsArray.size(); i++)
-		{
-			for (int j = 0; j < stopsArray.size(); j++)
-			{
-				for (int k = 0; k < directedEdgesArray.size(); k++)
-				{
-					currentOrigin = stopsArray.get(i);
-					currentDestination = stopsArray.get(j);
-					if ((directedEdgesArray.get(k).from() == currentOrigin.id)&&(directedEdgesArray.get(k).to() == currentDestination.id))
-					{
-						//if there is a directed edge between current origin and current destination
-						distanceTo[i][j] = directedEdgesArray.get(k).weight();
-						//weight = cost
-					}
-					else
-					{
-						distanceTo[i][j] = Integer.MAX_VALUE;
-					}
-				}
-			}
-		}
-	}
-	public static void dijkstra(int fromStopID, int toStopId)
-	{
-		
-		
-	}
-
-	public static void shortestPath(int fromStopID, int toStopId)
-	{
-		int k = fromStopID;
-		Stops currentStop;
-		Stops originStop;
-		for (int i = 0; i < stopsArray.size(); i++)
-		{
-			currentStop = stopsArray.get(i);
-			if (currentStop.id == fromStopID)
-			{
-				originStop = currentStop;
-				route.put(currentStop.id, originStop);
-				break;
-				//exit for loop
-				
-			}
-			//returning that no such stop exists
-		}
-		boolean[] shortestPath = new boolean[distanceTo.length];
-		//route.add(fromStopID);
-		shortestPath[k] = true;
-		while (true) {
-			int x = -1;
-			//check what is i?? need it to be the ID of all the possible stops
-			//doesn't start at 0
-			for (int i = 0; i < distanceTo.length; i++) {
-				if ((shortestPath[i] == false) && (distanceTo[k][i] !=Integer.MAX_VALUE)) {
-					x = i;
-					break; // break as new vertex is found
-				}
-			}
-			if (x == -1) {
-				return;
-			}
-			shortestPath[x] = true;
-			
-
-			for (int i = 0; i < distanceTo.length; i++) {
-				if (distanceTo[k][x] + distanceTo[x][i] < distanceTo[k][i]) {
-					distanceTo[k][i] = distanceTo[k][x] + distanceTo[x][i];
-					shortestPath[i] = false;
-					//route.add(node k , node i)
-					//edgeTo[k][i] = x;
-				}
-			}
-		}
-
-	}
-
-
-
-
-
-
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		ShortestPath st = new ShortestPath("stops", "stop_times", "transfers");
-		making2DArray();
 		//create the 2d array
 
 		System.out.println("Enter the origin stop");
@@ -277,8 +206,15 @@ public class ShortestPath {
 		int originStop = input.nextInt();
 		System.out.println("Enter the destination stop");
 		int destination = input.nextInt();
-
-		shortestPath(originStop, destination);
+		
+		ArrayList <DirectedEdge> directedEdgesOnRoute = dijkstraDist(originStop, destination);
+		gettingStops(directedEdgesOnRoute);
+		
+		for (Stops currentStop: stopsOnRoute)
+		{
+			System.out.println(currentStop.toString());
+		}
+		
 
 	}
 

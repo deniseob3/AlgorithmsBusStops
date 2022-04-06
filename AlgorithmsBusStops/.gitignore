@@ -12,3 +12,15 @@
 /Queue$Node.class
 /DirectedEdge.class
 /DijkstraSP.class
+/EdgeWeightedDigraph.class
+/IndexMinPQ.class
+/IndexMinPQ$HeapIterator.class
+/Stack.class
+/Stack$LinkedIterator.class
+/Stack$Node.class
+/StdOut.class
+/Bag.class
+/Bag$LinkedIterator.class
+/Bag$Node.class
+/StdRandom.class
+/In.class

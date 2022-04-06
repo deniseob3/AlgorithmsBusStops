@@ -192,10 +192,11 @@ public class ShortestPath {
 				{
 					currentOrigin = stopsArray.get(i);
 					currentDestination = stopsArray.get(j);
-					if ((directedEdgesArray.get(k).fromID == currentOrigin.id)&&(directedEdgesArray.get(k).toID == currentDestination.id))
+					if ((directedEdgesArray.get(k).from() == currentOrigin.id)&&(directedEdgesArray.get(k).to() == currentDestination.id))
 					{
 						//if there is a directed edge between current origin and current destination
-						distanceTo[i][j] = directedEdgesArray.get(k).cost;
+						distanceTo[i][j] = directedEdgesArray.get(k).weight();
+						//weight = cost
 					}
 					else
 					{
@@ -207,8 +208,6 @@ public class ShortestPath {
 	}
 	public static void dijkstra(int fromStopID, int toStopId)
 	{
-		HashMap<Integer, String> route = new HashMap<>();
-		//key value pairs
 		
 		
 	}

@@ -82,7 +82,7 @@ public class ShortestPath {
 					i++;
 				}
 				scanner2.close();
-				for (int k = 1; k <= stopTimesArray.size(); k ++)
+				for (int k = 1; k < stopTimesArray.size(); k ++)
 				{
 					if (stopTimesArray.get(k-1).tripID == (stopTimesArray.get(k).tripID))
 						//if two consecutive trips have the same ID, create a directed edge between them
@@ -97,7 +97,8 @@ public class ShortestPath {
 			}
 			catch(Exception e)
 			{
-				System.out.print("Invalid file name: stop times");
+				System.out.println("Invalid file name: stop times");
+				e.printStackTrace();
 			}
 		}
 

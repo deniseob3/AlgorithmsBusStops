@@ -7,7 +7,7 @@ public class ShortestPath {
 	static ArrayList <Stops> stopsArray = new ArrayList<Stops>();
 	static ArrayList<StopTimes> stopTimesArray = new ArrayList<StopTimes>();
 	static ArrayList<Transfers> transfersArray = new ArrayList <Transfers>();
-	
+
 	static ArrayList <DirectedEdge> directedEdgesArray = new ArrayList<DirectedEdge>();
 	///directed edges arraylist is in no particular order
 	static ArrayList <Stops> stopsOnRoute = new ArrayList <Stops> ();
@@ -16,7 +16,7 @@ public class ShortestPath {
 
 	ShortestPath(String stopFilename, String stopTimesFilename, String transfersFilename)
 	{
-		//read in all 3 files and add to relevant arraylists
+		//All files are reading in correctly
 		//stops
 		if (stopFilename !=null && stopFilename != "")
 		{
@@ -124,7 +124,7 @@ public class ShortestPath {
 							//if the time is valid then create a transfer object
 							Transfers currentTransfer = new Transfers(Integer.parseInt(line[0]), Integer.parseInt(line[1]), Integer.parseInt(line[2]), line[3]);
 							transfersArray.add(currentTransfer);
-							
+
 							int transferType = Integer.parseInt(line[2]);
 							if (transferType == 0)
 							{
@@ -150,21 +150,22 @@ public class ShortestPath {
 		}
 
 	}
-	
+
 	public static ArrayList<DirectedEdge> dijkstraDist(int fromStopID, int toStopID)
 	{
 		//validate user input
 		//valid stop Id's
-		
+
 		//create an edge weighted digraph
-		EdgeWeightedDigraph ewd = new EdgeWeightedDigraph(fromStopID);
+		//number of vertices
+		EdgeWeightedDigraph ewd = new EdgeWeightedDigraph(stopsArray.size());
 		DijkstraSP shortestPath = new DijkstraSP(ewd, fromStopID);
-		
+
 		if(shortestPath.hasPathTo(toStopID) == true)
 		{
 			Iterable <DirectedEdge> shortestPathIterable = shortestPath.pathTo(toStopID);
 			ArrayList <DirectedEdge> stopIDsOnRoute = new ArrayList <DirectedEdge>();
-			
+
 			for(DirectedEdge edge: shortestPathIterable)
 			{
 				stopIDsOnRoute.add(edge);
@@ -175,10 +176,10 @@ public class ShortestPath {
 		{
 			return null;
 		}
-				
-		
+
+
 	}
-	
+
 	public static void gettingStops(ArrayList <DirectedEdge> directedEdgesOnRoute)
 	{
 		for (DirectedEdge edge: directedEdgesOnRoute)
@@ -195,7 +196,7 @@ public class ShortestPath {
 			}
 		}
 	}
-	
+
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -207,15 +208,22 @@ public class ShortestPath {
 		int originStop = input.nextInt();
 		System.out.println("Enter the destination stop");
 		int destination = input.nextInt();
-		
-		ArrayList <DirectedEdge> directedEdgesOnRoute = dijkstraDist(originStop, destination);
-		gettingStops(directedEdgesOnRoute);
-		
-		for (Stops currentStop: stopsOnRoute)
-		{
-			System.out.println(currentStop.toString());
+		boolean validRoute = true;
+		while(validRoute = true) {
+			ArrayList <DirectedEdge> directedEdgesOnRoute = dijkstraDist(originStop, destination);
+			if(directedEdgesOnRoute == null)
+			{
+				System.out.println("No route exists!");
+				validRoute = false;
+			}
+			gettingStops(directedEdgesOnRoute);
+
+			for (Stops currentStop: stopsOnRoute)
+			{
+				System.out.println(currentStop.toString());
+			}
 		}
-		
+
 
 	}
 

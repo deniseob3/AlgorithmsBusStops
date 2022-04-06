@@ -160,7 +160,8 @@ public class ShortestPath {
 	}
 	public static EdgeWeightedDigraph creatingEdgeWeightedDigraph()
 	{
-		EdgeWeightedDigraph ewd = new EdgeWeightedDigraph(stopsArray.size());
+		EdgeWeightedDigraph ewd = new EdgeWeightedDigraph(20000);
+		//must change this back!!
 		for (DirectedEdge currentDirectedEdge: directedEdgesArray)
 		{
 			ewd.addEdge(currentDirectedEdge);
@@ -192,34 +193,38 @@ public class ShortestPath {
 			{
 				stopIDsOnRoute.add(edge);
 			}
-			System.out.println("Has shortest path, dijkstra dist done");
+			System.out.println("Has shortest path");
+			//System.out.println("Dijkstra dist: stop ID's on route: " + stopIDsOnRoute.size());
+			//11 stops on the route (646 to 1277)
 			return stopIDsOnRoute;
 		}
 		else
 		{
-			System.out.println("Has no shortest path, dijkstra dist done");
+			System.out.println("Has no shortest path");
 			return null;
 		}
 
 
 	}
 
-	public static void gettingStops(ArrayList <DirectedEdge> directedEdgesOnRoute)
+	public static ArrayList <Stops> gettingStops(ArrayList <DirectedEdge> directedEdgesOnRoute)
 	{
 		for (DirectedEdge edge: directedEdgesOnRoute)
 		{
-			Stops currentStop;
-			int currentStopID = edge.from();
-			for (int i = 0; i < stopsArray.size(); i++)
+			int from = edge.from();
+			for (int i = 0; i < stopsArray.size(); i ++)
 			{
-				if (currentStopID == stopsArray.get(i).id)
+				//need a get method
+				if (stopsArray.get(i).id == from)
 				{
-					currentStop = stopsArray.get(i);
-					stopsOnRoute.add(currentStop);
+					stopsOnRoute.add(stopsArray.get(i));
+					//System.out.println("ADDED");
 				}
 			}
 		}
-		System.out.println("Getting stops on route is done");
+		//System.out.println("Getting stops on route is done");
+		//System.out.println("STOPS ON ROUTE SIZE: " + stopsOnRoute.size());
+		return stopsOnRoute;
 	}
 
 
@@ -245,12 +250,18 @@ public class ShortestPath {
 		}
 		else 
 		{
-			gettingStops(directedEdgesOnRoute);
-
-			for (Stops currentStop: stopsOnRoute)
+			stopsOnRoute = gettingStops(directedEdgesOnRoute);
+			System.out.println("Number of stops on route: "+stopsOnRoute.size() );
+			//is of size zero
+			Stops currentStop;
+			System.out.println("List of stops on route: ");
+			for (int i = 0; i < stopsOnRoute.size(); i ++)
 			{
-				System.out.println(currentStop.toString());
+				currentStop = stopsOnRoute.get(i);
+				BusStopByName.stopTimesToString(currentStop);
+				//just cost left now
 			}
+			
 		}
 		input.close();
 

@@ -1,6 +1,6 @@
 
 public class Stops /*implements Comparable<Stops> */{
-	public static int id;
+	public int id;
 	public String code;
 	public String name;
 	public String description;
@@ -27,6 +27,7 @@ public class Stops /*implements Comparable<Stops> */{
 		//this.parentStation = parentStation;
 		
 	}
+
 
 
 	/*

@@ -55,6 +55,7 @@ public class ArrivalTimes {
 		boolean valid = true;
 		String [] line = userInput.trim().split(":");
 		int hours = Integer.parseInt(line[0]); //if is an integer??
+		String hoursString = "";
 		int minutes = Integer.parseInt(line[1]);
 		int seconds = Integer.parseInt(line[2]);
 		if ((hours > 23)|| (minutes > 59) || (seconds > 59))
@@ -117,7 +118,6 @@ public class ArrivalTimes {
 		
 		
 		//test with 20:00:00
-		//finding matching arrival times isn't working
 		
 	}
 

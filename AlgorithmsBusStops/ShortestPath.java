@@ -13,6 +13,7 @@ public class ShortestPath {
 	///directed edges arraylist is in no particular order
 	static ArrayList <Stops> stopsOnRoute = new ArrayList <Stops> ();
 	static int countOfStops;
+	static double totalCost;
 	//static EdgeWeightedDigraph ewd = new EdgeWeightedDigraph(countOfStops);
 
 
@@ -192,6 +193,7 @@ public class ShortestPath {
 			for(DirectedEdge edge: shortestPathIterable)
 			{
 				stopIDsOnRoute.add(edge);
+				totalCost += edge.weight();
 			}
 			System.out.println("Has shortest path");
 			//System.out.println("Dijkstra dist: stop ID's on route: " + stopIDsOnRoute.size());
@@ -262,6 +264,9 @@ public class ShortestPath {
 				//just cost left now
 			}
 			
+			System.out.println("Total cost is : " + totalCost);
+			//total cost for those inputs is just the amount of edges (cost 1 each)
+			//try one with transfers
 		}
 		input.close();
 

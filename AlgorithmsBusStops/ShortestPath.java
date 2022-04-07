@@ -228,6 +228,33 @@ public class ShortestPath {
 		//System.out.println("STOPS ON ROUTE SIZE: " + stopsOnRoute.size());
 		return stopsOnRoute;
 	}
+	
+	public static boolean userEnteredInteger(String userInput)
+	{
+		boolean valid = true;
+		try 
+		{
+	        int d = Integer.parseInt(userInput);
+	    } 
+		catch (NumberFormatException nfe) 
+		{
+			valid = false;
+	    }
+		return valid;
+	}
+	public static boolean isStopInBusSystem(int stopID)
+	{
+		boolean validStopID = false;
+		for (Stops currentStop: stopsArray)
+		{
+			if (currentStop.id == stopID)
+			{
+				validStopID = true;
+				// the stop entered by the user is one of the possible stops
+			}
+		}
+		return validStopID;
+	}
 
 
 	public static void shortestPathMethod() {
@@ -237,9 +264,52 @@ public class ShortestPath {
 
 		System.out.println("Enter the origin stop");
 		Scanner input = new Scanner(System.in);
-		int originStop = input.nextInt();
-		System.out.println("Enter the destination stop");
-		int destination = input.nextInt();
+		int originStop = 0;
+		int destination = 0;
+		boolean userEnteredIntegerO = false;
+		boolean userEnteredIntegerD = false;
+		//o = origin and d= destination 
+		String originString = input.next();
+		if(userEnteredInteger(originString) == true)
+		{
+			userEnteredIntegerO = true;
+			originStop = Integer.parseInt(originString);
+		}
+		while(userEnteredIntegerO == false)
+		{
+			System.out.print("Enter an integer");
+			originString = input.next();
+			if(userEnteredInteger(originString) == true)
+			{
+				userEnteredIntegerO = true;
+				originStop = Integer.parseInt(originString);
+			}
+		}
+		
+		System.out.println("Enter the destination stop");		
+		String destinationString = input.next();
+		if(userEnteredInteger(destinationString) == true)
+		{
+			userEnteredIntegerD = true;
+			destination = Integer.parseInt(destinationString);
+		}
+		while(userEnteredIntegerD == false)
+		{
+			System.out.print("Enter an integer");
+			destinationString = input.next();
+			if (userEnteredInteger(destinationString) == true)
+			{
+				userEnteredIntegerD = true;
+				destination = Integer.parseInt(destinationString);
+			}
+		}
+		//is stop in graph?
+		if ((isStopInBusSystem(originStop) == false) ||(isStopInBusSystem(destination) == false))
+		{
+			System.out.println("That stop is not in the bus system.");
+			input.close();
+			return;		
+		}
 		
 		//EdgeWeightedDigraph ewd = new EdgeWeightedDigraph(stopsArray.size());
 		EdgeWeightedDigraph ewd = creatingEdgeWeightedDigraph();

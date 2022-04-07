@@ -24,6 +24,7 @@ public class UserInterface {
 			BusStopByName.busStopByNameMethod();
 			//if size = 0, no stops exist
 			//trying to commit again
+			//committ
 		}
 		else
 		{

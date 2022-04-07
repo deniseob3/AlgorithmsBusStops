@@ -12,14 +12,17 @@ public class UserInterface {
 		if (userInput.equals("shortest path"))
 		{
 			ShortestPath.shortestPathMethod();
+			//user enters 2 stop IDs
 		}
 		if (userInput.equals("arrival times"))
 		{
 			ArrivalTimes.arrivalTimesMethod();
+			//user enters 1 time in the form hours:minutes:seconds
 		}
 		if (userInput.equals("bus stop by name")) 
 		{
 			BusStopByName.busStopByNameMethod();
+			//if size = 0, no stops exist
 		}
 		else
 		{

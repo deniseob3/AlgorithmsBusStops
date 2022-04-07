@@ -151,6 +151,11 @@ public class BusStopByName {
 		matchingNames = checkingMatches(userInput);
 		//return values associated with the matchingNamesKeys
 		matchingNamesToStops(matchingNames);
+		if (matchingNames.size() == 0)
+		{
+			System.out.print("No stops with such name exist ");
+			return;
+		}
 		
 		for (Stops currentStop: stopsThatMatchArray)
 		{

@@ -161,7 +161,7 @@ public class ShortestPath {
 	}
 	public static EdgeWeightedDigraph creatingEdgeWeightedDigraph()
 	{
-		EdgeWeightedDigraph ewd = new EdgeWeightedDigraph(20000);
+		EdgeWeightedDigraph ewd = new EdgeWeightedDigraph(100000);
 		//must change this back!!
 		for (DirectedEdge currentDirectedEdge: directedEdgesArray)
 		{

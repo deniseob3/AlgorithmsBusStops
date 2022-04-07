@@ -24,7 +24,10 @@ public class UserInterface {
 		else
 		{
 			System.out.println("Goodbye :) ");
+			input.close();
 		}
+		//must cater for wrong entries
+		//make this a loop/ play multiple games in the one use
 
 	}
 

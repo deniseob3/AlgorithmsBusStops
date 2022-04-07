@@ -106,7 +106,7 @@ public class ArrivalTimes {
 		}
 	}
 
-	public static void main(String[] args) throws IOException {
+	public static void arrivalTimesMethod() throws IOException {
 		// TODO Auto-generated method stub
 		System.out.print("enter a time: ");
 		Scanner input = new Scanner(System.in);

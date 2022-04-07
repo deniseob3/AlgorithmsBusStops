@@ -230,7 +230,7 @@ public class ShortestPath {
 	}
 
 
-	public static void main(String[] args) {
+	public static void shortestPathMethod() {
 		// TODO Auto-generated method stub
 		ShortestPath st = new ShortestPath("stops", "stop_times", "transfers");
 		//create the 2d array

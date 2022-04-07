@@ -138,7 +138,7 @@ public class BusStopByName {
 		System.out.println("Stop id: " + currentStop.id + " Stop code: " + currentStop.code + " stop name: " + currentStop.name + " stop description " + currentStop.description+ " latitude: "+ currentStop.latitude + " longitude " + currentStop.longitude + " zone id " + currentStop.zoneID);
 	}
 
-	public static void main(String[] args) throws IOException {
+	public static void busStopByNameMethod() throws IOException {
 	
 		System.out.println("Enter the stop name: ");
 		Scanner input = new Scanner(System.in);

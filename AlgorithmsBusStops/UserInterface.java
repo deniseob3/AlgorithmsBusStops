@@ -8,16 +8,16 @@ public class UserInterface {
 		System.out.println("Which feature would you like to use? ");
 		System.out.println("Options: shortest path, arrival times or bus stop by name");
 		Scanner input = new Scanner(System.in);
-		String userInput = input.next();
+		String userInput = input.nextLine();
 		if (userInput.equals("shortest path"))
 		{
 			ShortestPath.shortestPathMethod();
 		}
-		if (userInput == "arrival times")
+		if (userInput.equals("arrival times"))
 		{
 			ArrivalTimes.arrivalTimesMethod();
 		}
-		if (userInput == "bus stop by name") 
+		if (userInput.equals("bus stop by name")) 
 		{
 			BusStopByName.busStopByNameMethod();
 		}

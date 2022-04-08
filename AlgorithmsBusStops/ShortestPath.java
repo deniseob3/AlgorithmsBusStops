@@ -323,7 +323,7 @@ public class ShortestPath {
 		else 
 		{
 			stopsOnRoute = gettingStops(directedEdgesOnRoute);
-			System.out.println("Number of stops on route: "+stopsOnRoute.size() );
+			//System.out.println("Number of stops on route: "+stopsOnRoute.size() );
 			//is of size zero
 			Stops currentStop;
 			System.out.println("List of stops on route: ");

@@ -6,21 +6,21 @@ import java.util.Collections;
 import java.util.Scanner;
 
 public class ArrivalTimes {
-	
+
 	static ArrayList<StopTimes> stopTimesArray = new ArrayList<StopTimes>();
-	 static ArrayList<StopTimes> tripsThatMatchArrivalTime = new ArrayList<StopTimes>();
+	static ArrayList<StopTimes> tripsThatMatchArrivalTime = new ArrayList<StopTimes>();
 	//each element of the arraylist stores an object of type stops
-	
+
 	ArrivalTimes(String filenameStopTimes) throws IOException
 	{
-		
+
 		if (filenameStopTimes!= null && filenameStopTimes != "")
 		{
 			try {
 				File file2 = new File("./stop_times.txt");
 				Scanner scanner2 = new Scanner(file2);
 				int i = 0;
-				
+
 				while(scanner2.hasNextLine())
 				{
 					String [] line = scanner2.nextLine().trim().split(",");
@@ -37,12 +37,12 @@ public class ArrivalTimes {
 							StopTimes currentStopTime = new StopTimes(Integer.parseInt(line[0]),line[1], line[2], Integer.parseInt(line[3]), Integer.parseInt(line[4]), line[5], Integer.parseInt(line[6]), Integer.parseInt(line[7]) );
 							stopTimesArray.add(currentStopTime);
 						}
-						
+
 					}
 					i++;
 				}
 				scanner2.close();
-				
+
 			}
 			catch(Exception e)
 			{
@@ -53,18 +53,23 @@ public class ArrivalTimes {
 	public static boolean validateUserInput(String userInput)
 	{
 		boolean valid = true;
-		String [] line = userInput.trim().split(":");
-		int hours = Integer.parseInt(line[0]); //if is an integer??
-		String hoursString = "";
-		int minutes = Integer.parseInt(line[1]);
-		int seconds = Integer.parseInt(line[2]);
-		if ((hours > 23)|| (minutes > 59) || (seconds > 59))
+		try {
+			String [] line = userInput.trim().split(":");
+			int hours = Integer.parseInt(line[0]); //if is an integer??
+			String hoursString = "";
+			int minutes = Integer.parseInt(line[1]);
+			int seconds = Integer.parseInt(line[2]);
+			if ((hours > 23)|| (minutes > 59) || (seconds > 59))
+			{
+				valid = false;
+			}
+			return valid;
+		} catch (NumberFormatException e)
 		{
-			valid = false;
+			return false;
 		}
-		return valid;
 	}
-	
+
 	public static ArrayList <StopTimes> findingMatching(String userInput)
 	{
 		if (validateUserInput(userInput) == true)
@@ -79,19 +84,19 @@ public class ArrivalTimes {
 				}
 			}
 		}
-		
+
 		return tripsThatMatchArrivalTime;
-		
+
 	}
 	public static void arrayListSortedByStopID(ArrayList <StopTimes> tripsThatMatchArrivalTime)
 	{
 		//MUST PASS IN AN ARRAY OF TYPE STOP TIMES (NOT STOPS)
 		Collections.sort(tripsThatMatchArrivalTime);
-		
+
 		//implemented comparable interface and made a sort by ID method
 		//might not work
 	}
-	
+
 	public static void arrayListStopTimesToString(ArrayList <StopTimes> tripsThatMatchArrivalTime)
 	{
 		StopTimes currentTrip;
@@ -108,16 +113,27 @@ public class ArrivalTimes {
 
 	public static void arrivalTimesMethod() throws IOException {
 		// TODO Auto-generated method stub
-		System.out.print("enter a time: ");
+		System.out.println("enter a time: ");
 		Scanner input = new Scanner(System.in);
-		String userTime = input.next();
+		String userString = input.next();
+		String userTime;
 		ArrivalTimes at = new ArrivalTimes("\stop_times.txt");
+		boolean validTime = validateUserInput(userString);
+		if (validTime == false)
+		{
+			System.out.println("Enter a time in the format hours:minutes:seconds ");
+			userTime = input.next();
+		}
+		else
+		{
+			userTime = userString;
+		}
 		tripsThatMatchArrivalTime = findingMatching(userTime);
 		arrayListSortedByStopID(tripsThatMatchArrivalTime);
 		arrayListStopTimesToString(tripsThatMatchArrivalTime);
-				
+
 		//test with 20:00:00
 		//
-		
+
 	}
 }

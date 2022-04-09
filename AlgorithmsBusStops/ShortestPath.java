@@ -195,12 +195,20 @@ public class ShortestPath {
 				stopIDsOnRoute.add(edge);
 				totalCost += edge.weight();
 			}
-			System.out.println("Has shortest path");
+			if (stopIDsOnRoute.size() == 1)
+			{
+				System.out.println("Has no shortest path");
+				return null;
+			}
+			else
+			{
+				System.out.println("Has shortest path");
+			}
 			//System.out.println("Dijkstra dist: stop ID's on route: " + stopIDsOnRoute.size());
 			//11 stops on the route (646 to 1277)
 			return stopIDsOnRoute;
 		}
-		else
+		else 
 		{
 			System.out.println("Has no shortest path");
 			return null;
@@ -315,7 +323,7 @@ public class ShortestPath {
 		EdgeWeightedDigraph ewd = creatingEdgeWeightedDigraph();
 
 		ArrayList <DirectedEdge> directedEdgesOnRoute = dijkstraDist(originStop, destination, ewd);
-		if(directedEdgesOnRoute == null)
+		if(directedEdgesOnRoute == null || directedEdgesOnRoute.size() == 1)
 		{
 			System.out.println("No route exists!");
 			

@@ -129,6 +129,10 @@ public class ArrivalTimes {
 			userTime = userString;
 		}
 		tripsThatMatchArrivalTime = findingMatching(userTime);
+		if (tripsThatMatchArrivalTime.size() == 0)
+		{
+			System.out.println("No stops match that time. ");
+		}
 		arrayListSortedByStopID(tripsThatMatchArrivalTime);
 		arrayListStopTimesToString(tripsThatMatchArrivalTime);
 

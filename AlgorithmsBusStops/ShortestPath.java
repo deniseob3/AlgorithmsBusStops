@@ -14,7 +14,6 @@ public class ShortestPath {
 	static ArrayList <Stops> stopsOnRoute = new ArrayList <Stops> ();
 	static int countOfStops;
 	static double totalCost;
-	//static EdgeWeightedDigraph ewd = new EdgeWeightedDigraph(countOfStops);
 
 
 
@@ -97,7 +96,7 @@ public class ShortestPath {
 						DirectedEdge currentEdge = new DirectedEdge(stopTimesArray.get(k-1).stopID, stopTimesArray.get(k).stopID, 1);
 						//cost is 1 from stop times file
 						directedEdgesArray.add(currentEdge);
-						//ewd.addEdge(currentEdge);
+						
 
 					}
 				}
@@ -146,7 +145,6 @@ public class ShortestPath {
 							DirectedEdge currentEdge = new DirectedEdge(Integer.parseInt(line[0]), Integer.parseInt(line[0]), cost);
 							//creates directed edge between the two edges
 							directedEdgesArray.add(currentEdge);
-							//ewd.addEdge(currentEdge);
 						}
 					}
 				}
@@ -162,7 +160,7 @@ public class ShortestPath {
 	public static EdgeWeightedDigraph creatingEdgeWeightedDigraph()
 	{
 		EdgeWeightedDigraph ewd = new EdgeWeightedDigraph(100000);
-		//must change this back!!
+		
 		for (DirectedEdge currentDirectedEdge: directedEdgesArray)
 		{
 			ewd.addEdge(currentDirectedEdge);
@@ -205,7 +203,7 @@ public class ShortestPath {
 				System.out.println("Has shortest path");
 			}
 			//System.out.println("Dijkstra dist: stop ID's on route: " + stopIDsOnRoute.size());
-			//11 stops on the route (646 to 1277)
+			
 			return stopIDsOnRoute;
 		}
 		else 

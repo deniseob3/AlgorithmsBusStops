@@ -29,7 +29,6 @@ public class BusStopByName {
 				{
 					String [] line = scanner.nextLine().trim().split(",");
 					//split each input line by commas
-					//How big is the 2d array??/1d array (arraylist??)
 					if (i == 0)
 					{
 						//column headings
@@ -161,13 +160,6 @@ public class BusStopByName {
 		{
 			stopTimesToString(currentStop);
 		}
-		
-		//checking matches
-		
-		
-		
-		
-
 
 	}
 

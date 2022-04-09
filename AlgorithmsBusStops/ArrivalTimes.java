@@ -94,7 +94,7 @@ public class ArrivalTimes {
 		Collections.sort(tripsThatMatchArrivalTime);
 
 		//implemented comparable interface and made a sort by ID method
-		//might not work
+		
 	}
 
 	public static void arrayListStopTimesToString(ArrayList <StopTimes> tripsThatMatchArrivalTime)
@@ -136,8 +136,6 @@ public class ArrivalTimes {
 		arrayListSortedByStopID(tripsThatMatchArrivalTime);
 		arrayListStopTimesToString(tripsThatMatchArrivalTime);
 
-		//test with 20:00:00
-		//
 
 	}
 }
